@@ -109,18 +109,20 @@ height = 58.0
 
 [node name="Tiles" parent="." instance=ExtResource("1_d6p3j")]
 
-[node name="player" type="Node2D" parent="."]
-position = Vector2(212, 365)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(51, 734)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="player"]
+[node name="player" type="Node2D" parent="Camera2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Camera2D/player"]
 script = ExtResource("2_v3nol")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Camera2D/player/CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_lh52o")
 animation = &"idle"
 frame = 4
 frame_progress = 0.889958
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/player/CharacterBody2D"]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_xesxe")

@@ -7,6 +7,8 @@ const JUMP_VELOCITY = -400.0
 var _velocity = Vector2.ZERO
 var _sprites = {Vector2.RIGHT: 1, Vector2.LEFT: 2, Vector2.UP: 3, Vector2.DOWN: 4}
 
+@export var friction: float = 0.28
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
@@ -34,6 +36,8 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play('walking')
 		animated_sprite.flip_h = direction.x < 0
 	
-	self.position += SPEED * delta * direction
+	var target_velocity = direction * SPEED
+	_velocity += (target_velocity - _velocity) * friction
+	self.position += delta * _velocity
 	move_and_slide()
 	
