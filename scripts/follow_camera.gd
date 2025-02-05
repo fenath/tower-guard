@@ -5,7 +5,7 @@ extends Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	tilemap =  $"../../../Tiles".limit_tiles
+	tilemap =  $"../../../World".limit_tiles
 	if tilemap == null:
 		return
 	var mapRect = tilemap.get_used_rect()
