@@ -1,0 +1,126 @@
+[gd_scene load_steps=18 format=3 uid="uid://djaltvt06unu0"]
+
+[ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
+[ext_resource type="Script" path="res://scenes/character_body_2d.gd" id="2_v3nol"]
+[ext_resource type="Texture2D" uid="uid://deo0js5p0gxx7" path="res://assets/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_w4gtl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0c52"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6wva"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jivnv"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euptx"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndmye"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4vkm"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb4no"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k54yu"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rui1o"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anl6s"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7npc"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anj4k"]
+atlas = ExtResource("2_w4gtl")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lh52o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0c52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6wva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jivnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euptx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndmye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4vkm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb4no")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k54yu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rui1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anl6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7npc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anj4k")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xesxe"]
+radius = 17.0
+height = 58.0
+
+[node name="main" type="Node2D"]
+
+[node name="Tiles" parent="." instance=ExtResource("1_d6p3j")]
+
+[node name="player" type="Node2D" parent="."]
+position = Vector2(212, 365)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="player"]
+script = ExtResource("2_v3nol")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_lh52o")
+animation = &"idle"
+frame = 4
+frame_progress = 0.889958
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/CharacterBody2D"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_xesxe")
