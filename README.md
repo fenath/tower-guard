@@ -4,7 +4,8 @@ Jogo da matéria "Jogos de Computador" ministrada em 2024/2
 
 ## Roadmap
 
-- [ ] 1 : criação do cenário (independente) ![badge-em-progresso]
+- [x] 1 : criação do cenário inicial (independente) ![badge-finalizado]
+  - [ ]   1.1 : Criação do cenário final do jogo
 - [ ] 2 : criação do player com as animações (independente) ![badge-em-progresso]
 - [ ] 3 : criação da movimentação do player obedecendo a estrutura do cenário (depende do 1 e 2)
 - [ ] 4 : criação de labels que representam vida, comida, madeira, ouro, vida da torre (independente)
