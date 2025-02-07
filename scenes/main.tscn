@@ -1,36 +1,13 @@
-[gd_scene load_steps=25 format=4 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=32 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="2_v3nol"]
 [ext_resource type="Texture2D" uid="uid://deo0js5p0gxx7" path="res://assets/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_w4gtl"]
-[ext_resource type="Texture2D" uid="uid://c2pfd8k5ikndt" path="res://assets/UI/Banners/Banner_Connection_Right.png" id="3_obwu8"]
-[ext_resource type="Script" path="res://scripts/hud.gd" id="3_xevuv"]
+[ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="3_617g2"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="4_tcs51"]
-[ext_resource type="FontFile" uid="uid://i2wscuyqlt4s" path="res://assets/Effects/Fire/BigBlueTerm437NerdFont-Regular.ttf" id="5_rbkfh"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1mkxp"]
-texture = ExtResource("3_obwu8")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-2:1/0 = 0
-2:0/0 = 0
-1:0/0 = 0
-1:1/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_pp7r8"]
-tile_size = Vector2i(64, 64)
-sources/0 = SubResource("TileSetAtlasSource_1mkxp")
-
-[sub_resource type="LabelSettings" id="LabelSettings_upnkv"]
-font = ExtResource("5_rbkfh")
-font_size = 48
-font_color = Color(0.243137, 0.52549, 0.596078, 1)
-shadow_color = Color(0.0862745, 0.109804, 0.180392, 1)
-shadow_offset = Vector2(3, 3)
+[ext_resource type="Script" path="res://scripts/gold_entity.gd" id="6_jgvlv"]
+[ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="7_52rrg"]
+[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="8_xnn5u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0c52"]
 atlas = ExtResource("2_w4gtl")
@@ -133,6 +110,74 @@ animations = [{
 radius = 18.0
 height = 44.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x4rj"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7krr"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfmud"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0f6a"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kakst"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nas8"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hngpd"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ouhmi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_52rrg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x4rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7krr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfmud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0f6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kakst")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nas8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hngpd")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
+radius = 23.0217
+
 [node name="main" type="Node2D"]
 
 [node name="World" parent="." instance=ExtResource("1_d6p3j")]
@@ -144,52 +189,8 @@ position = Vector2(371, 465)
 script = ExtResource("2_v3nol")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="player/CharacterBody2D"]
-scale = Vector2(0.5, 0.5)
-transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
 
-[node name="Hud" type="Control" parent="player/CharacterBody2D/CanvasLayer" groups=["hud"]]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("3_xevuv")
-
-[node name="HP" type="TextureRect" parent="player/CharacterBody2D/CanvasLayer/Hud"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="banner" type="TileMapLayer" parent="player/CharacterBody2D/CanvasLayer/Hud/HP"]
-position = Vector2(-5, -161)
-tile_map_data = PackedByteArray("AAAAAAIAAAAAAAAAAAAAAAMAAAAAAAEAAAAAAAQAAAAAAAIAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAACAAAAAAABAAQAAAABAAIAAAACAAQAAAABAAIAAAADAAQAAAABAAIAAAAEAAQAAAACAAIAAAAEAAMAAAACAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAA=")
-tile_set = SubResource("TileSet_pp7r8")
-
-[node name="HpLabel" type="Label" parent="player/CharacterBody2D/CanvasLayer/Hud/HP"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = 38.0
-offset_right = 236.0
-offset_bottom = 89.0
-text = "❤️ 3"
-label_settings = SubResource("LabelSettings_upnkv")
-
-[node name="Button" type="Button" parent="player/CharacterBody2D/CanvasLayer/Hud"]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 166.0
-offset_right = 394.0
-offset_bottom = 222.0
-theme_override_fonts/font = ExtResource("5_rbkfh")
-theme_override_font_sizes/font_size = 48
-text = "increase hp"
-
-[node name="Button2" type="Button" parent="player/CharacterBody2D/CanvasLayer/Hud"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 242.0
-offset_right = 392.0
-offset_bottom = 298.0
-theme_override_fonts/font = ExtResource("5_rbkfh")
-theme_override_font_sizes/font_size = 48
-text = "decrease hp"
+[node name="Hud" parent="player/CharacterBody2D/CanvasLayer" instance=ExtResource("3_617g2")]
 
 [node name="followCamera" type="Camera2D" parent="player/CharacterBody2D"]
 process_callback = 0
@@ -208,5 +209,21 @@ frame_progress = 0.889958
 position = Vector2(0, 12)
 shape = SubResource("CapsuleShape2D_xesxe")
 
-[connection signal="pressed" from="player/CharacterBody2D/CanvasLayer/Hud/Button" to="player/CharacterBody2D/CanvasLayer/Hud" method="_on_button_pressed"]
-[connection signal="pressed" from="player/CharacterBody2D/CanvasLayer/Hud/Button2" to="player/CharacterBody2D/CanvasLayer/Hud" method="_on_button_2_pressed"]
+[node name="GoldEntity" type="Node2D" parent="player" groups=["resources"]]
+position = Vector2(202, 345)
+script = ExtResource("6_jgvlv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/GoldEntity"]
+position = Vector2(-8, -202)
+sprite_frames = SubResource("SpriteFrames_ouhmi")
+animation = &"spawn"
+frame = 6
+frame_progress = 1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="player/GoldEntity/AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/GoldEntity/AnimatedSprite2D/StaticBody2D"]
+position = Vector2(6, 9)
+shape = SubResource("CircleShape2D_uk4ba")
+
+[connection signal="animation_finished" from="player/GoldEntity/AnimatedSprite2D" to="player/GoldEntity" method="_on_animated_sprite_2d_animation_finished"]
