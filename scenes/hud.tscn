@@ -94,6 +94,7 @@ text = "❤️ 3"
 label_settings = SubResource("LabelSettings_upnkv")
 
 [node name="Button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 40.0
 offset_top = 193.0
@@ -104,6 +105,7 @@ theme_override_font_sizes/font_size = 16
 text = "increase hp"
 
 [node name="Button2" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 40.0
 offset_top = 240.0
@@ -114,6 +116,7 @@ theme_override_font_sizes/font_size = 16
 text = "decrease hp"
 
 [node name="Button3" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 40.0
 offset_top = 290.0
