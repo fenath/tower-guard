@@ -53,8 +53,8 @@ shadow_offset = Vector2(3, 3)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1aapl"]
 font = ExtResource("3_yxomu")
-outline_size = 4
-outline_color = Color(0.356863, 0.356863, 0.266667, 1)
+outline_size = 8
+outline_color = Color(0.306017, 0.305986, 0.225674, 1)
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.27451)
 
@@ -135,7 +135,6 @@ offset_bottom = 5.0
 text = "3x"
 label_settings = SubResource("LabelSettings_1aapl")
 horizontal_alignment = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="meat" type="Sprite2D" parent="."]
 position = Vector2(920, 103)
