@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="1_tcoao"]
 [ext_resource type="Script" path="res://scripts/gold.gd" id="1_wj31a"]
-[ext_resource type="Texture2D" uid="uid://h3y4qmkl4otj" path="res://assets/Resources/Resources/G_Spawn.png" id="2_7looj"]
+[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="2_7looj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trv2n"]
 atlas = ExtResource("2_7looj")
@@ -79,7 +79,7 @@ script = ExtResource("1_wj31a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nhy5g")
-animation = &"idle"
+animation = &"spawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

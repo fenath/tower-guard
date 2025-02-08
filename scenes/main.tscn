@@ -1,12 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=35 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="2_v3nol"]
 [ext_resource type="Texture2D" uid="uid://deo0js5p0gxx7" path="res://assets/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_w4gtl"]
+[ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="3_617g2"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="4_tcs51"]
 [ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="5_w7uh3"]
+[ext_resource type="Script" path="res://scripts/gold_entity.gd" id="6_jgvlv"]
 [ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="6_mytpp"]
+[ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="7_52rrg"]
 [ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="7_m1s7h"]
+[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="8_xnn5u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0c52"]
 atlas = ExtResource("2_w4gtl")
@@ -109,6 +113,74 @@ animations = [{
 radius = 18.0
 height = 44.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x4rj"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7krr"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfmud"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0f6a"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kakst"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nas8"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hngpd"]
+atlas = ExtResource("8_xnn5u")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ouhmi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_52rrg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x4rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7krr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfmud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0f6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kakst")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nas8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hngpd")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
+radius = 23.0217
+
 [node name="main" type="Node2D"]
 
 [node name="World" parent="." instance=ExtResource("1_d6p3j")]
@@ -131,6 +203,10 @@ position = Vector2(371, 465)
 collision_mask = 3
 script = ExtResource("2_v3nol")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="player/CharacterBody2D"]
+
+[node name="Hud" parent="player/CharacterBody2D/CanvasLayer" instance=ExtResource("3_617g2")]
+
 [node name="followCamera" type="Camera2D" parent="player/CharacterBody2D"]
 process_callback = 0
 limit_left = 0
@@ -145,3 +221,22 @@ animation = &"idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/CharacterBody2D"]
 position = Vector2(0, 12)
 shape = SubResource("CapsuleShape2D_xesxe")
+
+[node name="GoldEntity" type="Node2D" parent="player" groups=["resources"]]
+position = Vector2(202, 345)
+script = ExtResource("6_jgvlv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/GoldEntity"]
+position = Vector2(-8, -202)
+sprite_frames = SubResource("SpriteFrames_ouhmi")
+animation = &"spawn"
+frame = 6
+frame_progress = 1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="player/GoldEntity/AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/GoldEntity/AnimatedSprite2D/StaticBody2D"]
+position = Vector2(6, 9)
+shape = SubResource("CircleShape2D_uk4ba")
+
+[connection signal="animation_finished" from="player/GoldEntity/AnimatedSprite2D" to="player/GoldEntity" method="_on_animated_sprite_2d_animation_finished"]
