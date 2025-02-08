@@ -1,16 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=35 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="2_v3nol"]
 [ext_resource type="Texture2D" uid="uid://deo0js5p0gxx7" path="res://assets/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_w4gtl"]
 [ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="3_617g2"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="4_tcs51"]
-[ext_resource type="Script" path="res://scripts/gold_entity.gd" id="6_jgvlv"]
-[ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="7_52rrg"]
-[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="8_xnn5u"]
 [ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="5_w7uh3"]
+[ext_resource type="Script" path="res://scripts/gold_entity.gd" id="6_jgvlv"]
 [ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="6_mytpp"]
+[ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="7_52rrg"]
 [ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="7_m1s7h"]
+[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="8_xnn5u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0c52"]
 atlas = ExtResource("2_w4gtl")
