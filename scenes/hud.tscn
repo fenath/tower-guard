@@ -97,34 +97,34 @@ label_settings = SubResource("LabelSettings_upnkv")
 layout_mode = 0
 offset_left = 40.0
 offset_top = 193.0
-offset_right = 400.0
-offset_bottom = 249.0
+offset_right = 190.0
+offset_bottom = 233.0
 theme_override_fonts/font = ExtResource("3_yxomu")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 16
 text = "increase hp"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 38.0
-offset_top = 269.0
-offset_right = 398.0
-offset_bottom = 325.0
+offset_left = 40.0
+offset_top = 240.0
+offset_right = 190.0
+offset_bottom = 280.0
 theme_override_fonts/font = ExtResource("3_yxomu")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 16
 text = "decrease hp"
 
 [node name="Button3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 350.0
-offset_right = 393.0
-offset_bottom = 406.0
+offset_left = 40.0
+offset_top = 290.0
+offset_right = 190.0
+offset_bottom = 330.0
 theme_override_fonts/font = ExtResource("3_yxomu")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 16
 text = "add meat"
 
 [node name="gold" type="Sprite2D" parent="."]
-position = Vector2(90, 550)
+position = Vector2(770, 103)
 texture = ExtResource("4_rchlv")
 
 [node name="Label" type="Label" parent="gold"]
@@ -135,9 +135,10 @@ offset_bottom = 5.0
 text = "3x"
 label_settings = SubResource("LabelSettings_1aapl")
 horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="meat" type="Sprite2D" parent="."]
-position = Vector2(240, 550)
+position = Vector2(920, 103)
 texture = ExtResource("5_ub4xh")
 
 [node name="Label" type="Label" parent="meat"]
@@ -150,7 +151,7 @@ label_settings = SubResource("LabelSettings_1aapl")
 horizontal_alignment = 2
 
 [node name="wood" type="Sprite2D" parent="."]
-position = Vector2(390, 549)
+position = Vector2(1070, 102)
 texture = ExtResource("6_j0uyu")
 offset = Vector2(0, -6)
 
