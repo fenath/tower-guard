@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://br5nrp3rtcimi"]
+
+[ext_resource type="Script" path="res://scripts/wood.gd" id="1_mtbca"]
+[ext_resource type="Texture2D" uid="uid://c8rwasm7d80ln" path="res://assets/Resources/Resources/W_Idle.png" id="1_wxc25"]
+[ext_resource type="Texture2D" uid="uid://dmsxrf8m5q8ke" path="res://assets/Resources/Resources/W_Spawn.png" id="2_jxmfh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2s5j"]
+atlas = ExtResource("2_jxmfh")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3w7wa"]
+atlas = ExtResource("2_jxmfh")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mywv1"]
+atlas = ExtResource("2_jxmfh")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjusq"]
+atlas = ExtResource("2_jxmfh")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur1ik"]
+atlas = ExtResource("2_jxmfh")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6cr1"]
+atlas = ExtResource("2_jxmfh")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm882"]
+atlas = ExtResource("2_jxmfh")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsr5p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wxc25")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2s5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3w7wa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mywv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjusq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur1ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6cr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm882")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8awwb"]
+radius = 6.95332
+height = 51.2342
+
+[node name="wood" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_mtbca")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qsr5p")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 23)
+rotation = 1.24615
+shape = SubResource("CapsuleShape2D_8awwb")

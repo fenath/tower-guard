@@ -1,9 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=22 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="2_v3nol"]
 [ext_resource type="Texture2D" uid="uid://deo0js5p0gxx7" path="res://assets/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_w4gtl"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="4_tcs51"]
+[ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="5_w7uh3"]
+[ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="6_mytpp"]
+[ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="7_m1s7h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0c52"]
 atlas = ExtResource("2_w4gtl")
@@ -110,10 +113,22 @@ height = 44.0
 
 [node name="World" parent="." instance=ExtResource("1_d6p3j")]
 
+[node name="resources" type="Node2D" parent="."]
+
+[node name="meat" parent="resources" instance=ExtResource("5_w7uh3")]
+position = Vector2(381, 692)
+
+[node name="gold" parent="resources" instance=ExtResource("6_mytpp")]
+position = Vector2(506, 563)
+
+[node name="wood" parent="resources" instance=ExtResource("7_m1s7h")]
+position = Vector2(593, 688)
+
 [node name="player" type="Node2D" parent="."]
 position = Vector2(371, 465)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="player"]
+collision_mask = 3
 script = ExtResource("2_v3nol")
 
 [node name="followCamera" type="Camera2D" parent="player/CharacterBody2D"]
@@ -126,8 +141,6 @@ script = ExtResource("4_tcs51")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_lh52o")
 animation = &"idle"
-frame = 4
-frame_progress = 0.889958
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/CharacterBody2D"]
 position = Vector2(0, 12)
