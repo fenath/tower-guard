@@ -73,15 +73,16 @@ animations = [{
 radius = 17.0
 height = 34.0
 
-[node name="gold" type="Area2D"]
+[node name="gold" type="Area2D" groups=["resources"]]
 collision_layer = 2
 script = ExtResource("1_wj31a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nhy5g")
 animation = &"spawn"
+frame = 6
+frame_progress = 0.882205
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(4, 14)
 shape = SubResource("CapsuleShape2D_rt1ea")

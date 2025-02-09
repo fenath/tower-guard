@@ -7,9 +7,18 @@ const JUMP_VELOCITY = -400.0
 var _velocity = Vector2.ZERO
 var _sprites = {Vector2.RIGHT: 1, Vector2.LEFT: 2, Vector2.UP: 3, Vector2.DOWN: 4}
 
+@onready var magnet_action: MagnetAction = preload(
+	"res://scenes/magnet_action.tscn"
+	).instantiate() as MagnetAction
+
 @export var friction: float = 0.28
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+func _ready() -> void:
+	if magnet_action:
+		self.add_child(magnet_action)
+		magnet_action.position = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	# Once again, we call `Input.get_action_strength()` to support analog movement.

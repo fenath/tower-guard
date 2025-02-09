@@ -70,10 +70,10 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8awwb"]
-radius = 6.95332
+radius = 9.48679
 height = 51.2342
 
-[node name="wood" type="Area2D"]
+[node name="wood" type="Area2D" groups=["resources"]]
 collision_layer = 2
 script = ExtResource("1_mtbca")
 
@@ -82,7 +82,6 @@ sprite_frames = SubResource("SpriteFrames_qsr5p")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 23)
 rotation = 1.24615
 shape = SubResource("CapsuleShape2D_8awwb")
