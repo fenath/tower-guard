@@ -7,6 +7,14 @@ var gold_scn: PackedScene = preload('res://prefabs/gold.tscn')
 var wood_scn: PackedScene = preload('res://prefabs/wood.tscn')
 var meat_scn: PackedScene = preload('res://prefabs/meat.tscn')
 
+const ENEMY := preload("res://prefabs/enemy.tscn")
+
+func add_enemy() -> void:
+	var enemy = ENEMY.instantiate() as Enemy
+	main_scene.add_child(enemy)
+	enemy.global_position = Vector2(983, 656)
+	enemy.target = main_scene.get_node('player/CharacterBody2D')
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_child(main_scene)
@@ -19,6 +27,8 @@ func _ready() -> void:
 			child.gold_up.connect(hud._on_gold_up)
 		if child.has_signal('wood_up'):
 			child.wood_up.connect(hud._on_wood_up)
+			
+	add_enemy()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
