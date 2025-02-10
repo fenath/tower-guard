@@ -21,7 +21,6 @@ func _ready() -> void:
 		magnet_action.position = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	# Once again, we call `Input.get_action_strength()` to support analog movement.
 	var x : int = 0
 	var y : int = 0
 	
@@ -47,6 +46,6 @@ func _physics_process(delta: float) -> void:
 	
 	var target_velocity = direction * SPEED
 	_velocity += (target_velocity - _velocity) * friction
-	self.position += delta * _velocity
+	velocity = _velocity
 	move_and_slide()
 	
