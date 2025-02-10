@@ -7,23 +7,25 @@ class_name Hud extends Control
 @onready var gold_qty: int = 0: set =  _set_gold
 @onready var wood_qty: int = 0: set =  _set_wood
 
+signal collect
+
 func play_pickup() -> void:
 	$pickupSound.play()
 
 func _set_meat(value):
 	meat_qty = value
 	$meat/Label.text = label_txt(value)
-	play_pickup()
+	collect.emit()
 
 func _set_gold(value):
 	gold_qty = value
 	$gold/Label.text = label_txt(value)
-	play_pickup()
+	collect.emit()
 
 func _set_wood(value):
 	wood_qty = value
 	$wood/Label.text = label_txt(value)
-	play_pickup()
+	collect.emit()
 
 func label_txt(value: int) -> String:
 	return str(value) + 'x'
@@ -34,6 +36,7 @@ func _ready() -> void:
 	meat_qty = 0
 	gold_qty = 0
 	wood_qty = 0
+	collect.connect(play_pickup)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
