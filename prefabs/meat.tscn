@@ -73,7 +73,7 @@ animations = [{
 radius = 11.6471
 height = 43.2664
 
-[node name="meat" type="Area2D"]
+[node name="meat" type="Area2D" groups=["resources"]]
 collision_layer = 2
 script = ExtResource("1_fspv4")
 
@@ -82,7 +82,6 @@ sprite_frames = SubResource("SpriteFrames_nekuw")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(2, 14)
 rotation = 0.98001
 shape = SubResource("CapsuleShape2D_u7buq")

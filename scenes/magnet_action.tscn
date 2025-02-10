@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds7ggw0dqi02g"]
+
+[ext_resource type="Script" path="res://scripts/magnet_action.gd" id="1_3tuwg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhxap"]
+radius = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqgwq"]
+radius = 25.0
+
+[node name="MagnetAction" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_3tuwg")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xhxap")
+
+[node name="collect" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="shape" type="CollisionShape2D" parent="collect"]
+shape = SubResource("CircleShape2D_xqgwq")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

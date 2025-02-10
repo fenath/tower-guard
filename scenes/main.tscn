@@ -113,6 +113,9 @@ animations = [{
 radius = 18.0
 height = 44.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
+radius = 25.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6x4rj"]
 atlas = ExtResource("8_xnn5u")
 region = Rect2(0, 0, 128, 128)
@@ -178,23 +181,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
-radius = 23.0217
-
 [node name="main" type="Node2D"]
 
 [node name="World" parent="." instance=ExtResource("1_d6p3j")]
 
-[node name="resources" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="meat" parent="resources" instance=ExtResource("5_w7uh3")]
-position = Vector2(381, 692)
-
-[node name="gold" parent="resources" instance=ExtResource("6_mytpp")]
-position = Vector2(506, 563)
-
-[node name="wood" parent="resources" instance=ExtResource("7_m1s7h")]
-position = Vector2(593, 688)
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("3_617g2")]
 
 [node name="player" type="Node2D" parent="."]
 position = Vector2(371, 465)
@@ -202,10 +195,6 @@ position = Vector2(371, 465)
 [node name="CharacterBody2D" type="CharacterBody2D" parent="player"]
 collision_mask = 3
 script = ExtResource("2_v3nol")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="player/CharacterBody2D"]
-
-[node name="Hud" parent="player/CharacterBody2D/CanvasLayer" instance=ExtResource("3_617g2")]
 
 [node name="followCamera" type="Camera2D" parent="player/CharacterBody2D"]
 process_callback = 0
@@ -222,21 +211,27 @@ animation = &"idle"
 position = Vector2(0, 12)
 shape = SubResource("CapsuleShape2D_xesxe")
 
-[node name="GoldEntity" type="Node2D" parent="player" groups=["resources"]]
-position = Vector2(202, 345)
+[node name="resources" type="Node2D" parent="."]
+
+[node name="meat" parent="resources" instance=ExtResource("5_w7uh3")]
+position = Vector2(381, 692)
+
+[node name="gold" parent="resources" instance=ExtResource("6_mytpp")]
+position = Vector2(506, 563)
+
+[node name="wood" parent="resources" instance=ExtResource("7_m1s7h")]
+position = Vector2(593, 688)
+
+[node name="GoldEntity" type="StaticBody2D" parent="." groups=["resources"]]
+position = Vector2(565, 608)
 script = ExtResource("6_jgvlv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/GoldEntity"]
-position = Vector2(-8, -202)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoldEntity"]
+position = Vector2(6, 9)
+shape = SubResource("CircleShape2D_uk4ba")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GoldEntity"]
 sprite_frames = SubResource("SpriteFrames_ouhmi")
 animation = &"spawn"
 frame = 6
 frame_progress = 1.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="player/GoldEntity/AnimatedSprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/GoldEntity/AnimatedSprite2D/StaticBody2D"]
-position = Vector2(6, 9)
-shape = SubResource("CircleShape2D_uk4ba")
-
-[connection signal="animation_finished" from="player/GoldEntity/AnimatedSprite2D" to="player/GoldEntity" method="_on_animated_sprite_2d_animation_finished"]
