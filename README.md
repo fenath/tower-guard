@@ -8,10 +8,10 @@ Jogo da matéria "Jogos de Computador" ministrada em 2024/2
   - [ ]   1.1 : Criação do cenário final do jogo
 - [x] 2 : criação do player com as animações (independente) ![badge-finalizado]
 - [x] 3 : criação da movimentação do player obedecendo a estrutura do cenário (depende do 1 e 2)![badge-finalizado]
-- [ ] 4 : criação de labels que representam vida, comida, madeira, ouro, vida da torre (independente) ![badge-em-progresso]
-- [ ] 5 : criação dos goblins que patrulham com as animações (independente)
-- [ ] 6 : criar função de perseguição do goblin ao player (dependente do 1, 2, 3, 5)
-- [ ] 7 : criação dos recursos coletáveis e interação de coleta (depende do 4) ![badge-em-progresso]
+- [x] 4 : criação de labels que representam vida, comida, madeira, ouro, vida da torre (independente) ![badge-finalizado]
+- [x] 5 : criação dos goblins que patrulham com as animações (independente) ![badge-finalizado]
+- [ ] 6 : criar função de perseguição do goblin ao player (dependente do 1, 2, 3, 5) ![badge-em-progresso]
+- [x] 7 : criação dos recursos coletáveis e interação de coleta (depende do 4) ![badge-finalizado]
 - [ ] 8 : criar interação do goblin com a torre (depende do 1, 5) 
 - [ ] 9 : criação da animação e funcionamento do upgrade das torres (dependente do 1)
 - [ ] 10 : Power Ups (independente)
