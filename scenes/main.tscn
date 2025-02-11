@@ -182,6 +182,7 @@ animations = [{
 }]
 
 [node name="main" type="Node2D"]
+y_sort_enabled = true
 
 [node name="World" parent="." instance=ExtResource("1_d6p3j")]
 
@@ -190,14 +191,15 @@ animations = [{
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("3_617g2")]
 
 [node name="player" type="Node2D" parent="."]
+y_sort_enabled = true
 position = Vector2(371, 465)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="player"]
+y_sort_enabled = true
 collision_mask = 3
 script = ExtResource("2_v3nol")
 
 [node name="followCamera" type="Camera2D" parent="player/CharacterBody2D"]
-zoom = Vector2(0.5, 0.5)
 process_callback = 0
 limit_left = 0
 limit_top = 0
