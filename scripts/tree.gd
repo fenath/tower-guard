@@ -1,4 +1,4 @@
-extends Area2D
+class_name TreeObject extends StaticBody2D
 
 
 const MIN_DROP: int = 2

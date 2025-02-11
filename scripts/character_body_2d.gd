@@ -39,7 +39,7 @@ func stop_attack() -> void:
 func deal_damage() -> void:
 	await get_tree().create_timer(0.2).timeout
 	
-	var colliders = attack_area.get_overlapping_areas()
+	var colliders = attack_area.get_overlapping_bodies()
 	
 	for i in colliders:
 		if i.has_method('damage'):
@@ -85,6 +85,7 @@ func _physics_process(delta: float) -> void:
 	
 	var target_velocity = direction * SPEED
 	_velocity += (target_velocity - _velocity) * friction
-	self.position += delta * _velocity
+	self.velocity = _velocity
+	#self.position += delta * _velocity
 	move_and_slide()
 	

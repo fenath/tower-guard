@@ -4,9 +4,6 @@
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_r4wqh"]
 [ext_resource type="Script" path="res://scripts/health_component.gd" id="3_536mh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onxyc"]
-size = Vector2(25, 56)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_aja1u"]
 atlas = ExtResource("1_ev32q")
 region = Rect2(0, 384, 192, 192)
@@ -74,12 +71,12 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Tree" type="Area2D"]
-script = ExtResource("1_r4wqh")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onxyc"]
+size = Vector2(25, 40)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 46)
-shape = SubResource("RectangleShape2D_onxyc")
+[node name="Tree" type="StaticBody2D"]
+collision_mask = 3
+script = ExtResource("1_r4wqh")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7dcf2")
@@ -88,4 +85,6 @@ animation = &"chopped"
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_536mh")
 
-[connection signal="animation_changed" from="Sprite" to="." method="_on_sprite_animation_changed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 54)
+shape = SubResource("RectangleShape2D_onxyc")
