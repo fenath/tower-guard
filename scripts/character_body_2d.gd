@@ -85,7 +85,6 @@ func _physics_process(delta: float) -> void:
 	
 	var target_velocity = direction * SPEED
 	_velocity += (target_velocity - _velocity) * friction
-	self.velocity = _velocity
-	#self.position += delta * _velocity
+	velocity = _velocity
 	move_and_slide()
 	
