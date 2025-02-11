@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bm5i5qwn085kf"]
+[gd_scene load_steps=13 format=3 uid="uid://bm5i5qwn085kf"]
 
 [ext_resource type="Texture2D" uid="uid://dfhun0rxuho42" path="res://assets/Resources/Trees/Tree.png" id="1_ev32q"]
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_r4wqh"]
+[ext_resource type="Script" path="res://scripts/health_component.gd" id="3_536mh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onxyc"]
 size = Vector2(25, 56)
@@ -40,7 +41,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aja1u")
 }],
-"loop": true,
+"loop": false,
 "name": &"chopped",
 "speed": 5.0
 }, {
@@ -51,9 +52,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n62uk")
 }],
-"loop": true,
+"loop": false,
 "name": &"hit",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -82,4 +83,9 @@ shape = SubResource("RectangleShape2D_onxyc")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7dcf2")
-animation = &"idle"
+animation = &"chopped"
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_536mh")
+
+[connection signal="animation_changed" from="Sprite" to="." method="_on_sprite_animation_changed"]
