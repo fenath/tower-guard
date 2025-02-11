@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://scripts/test_scene.gd" id="1_0ktvs"]
 
 [node name="TestScene" type="Node2D"]
+position = Vector2(0, 22)
 script = ExtResource("1_0ktvs")

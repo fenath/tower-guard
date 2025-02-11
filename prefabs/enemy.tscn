@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://cqndhocdt7dso"]
+[gd_scene load_steps=24 format=3 uid="uid://cqndhocdt7dso"]
 
 [ext_resource type="Texture2D" uid="uid://dvotad0vy67hq" path="res://assets/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_6jcrq"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_jwbne"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ge2oi"]
 radius = 23.0217
@@ -104,7 +105,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -130,7 +131,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -153,10 +154,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_jwbne")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ge2oi")
@@ -164,3 +166,10 @@ shape = SubResource("CircleShape2D_ge2oi")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dcaq6")
 animation = &"run"
+frame_progress = 0.176552
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
