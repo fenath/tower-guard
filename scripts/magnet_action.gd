@@ -10,6 +10,9 @@ const MAX_SPEED = 300
 var resources: Array[Node2D] = []
 var speeds: Array[Vector2] = []
 
+signal collect
+
+
 func set_radius(new_radius: int)-> void:
 	radius = new_radius
 	shape.shape.radius = radius
@@ -25,7 +28,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	for i in range(resources.size()):
 		var resource = resources[i]
-		
+		if resource == null:
+			continue
 		var direction: Vector2 = (self.global_position - resource.global_position)
 		if direction == Vector2.ZERO:
 			continue
@@ -58,18 +62,18 @@ func _on_collection_area_entered(body: Node2D) -> void:
 		var i = resources.find(body)
 		speeds.remove_at(i)
 		resources.erase(body)
-		collect(body)
+		collect.emit(body)
 		body.queue_free()
 		# TODO: if body.has_method('collect'):
 		#			body.collect()
 		
-func collect(body: Node2D) -> void:
-	if body.has_signal('gold_up'):
-		body.gold_up.emit()
-	if body.has_signal('meat_up'):
-		body.meat_up.emit()
-	if body.has_signal('wood_up'):
-		body.wood_up.emit()
+#func collect(body: Node2D) -> void:
+	#if body.has_signal('gold_up'):
+		#body.gold_up.emit()
+	#if body.has_signal('meat_up'):
+		#body.meat_up.emit()
+	#if body.has_signal('wood_up'):
+		#body.wood_up.emit()
 
 
 func _on_area_entered(area: Area2D) -> void:

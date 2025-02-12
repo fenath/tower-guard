@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name PlayerCharacter extends CharacterBody2D
 
 
 const SPEED = 300.0
@@ -13,9 +13,13 @@ signal attack
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea
 
+var inventory: Inventory = Inventory.new()
+
 var _velocity = Vector2.ZERO
 var direction: Vector2 = Vector2.ZERO
 var damage = 1
+
+var last_x: float = 0.0
 
 var is_attacking: bool = false
 
@@ -39,21 +43,30 @@ func stop_attack() -> void:
 func deal_damage() -> void:
 	await get_tree().create_timer(0.2).timeout
 	
-	var colliders = attack_area.get_overlapping_bodies()
+	var colliders = attack_area.get_overlapping_areas()
 	
 	for i in colliders:
-		if i.has_method('damage'):
-			var attack = Attack.new()
-			attack.damage = damage
-			i.damage(attack)
+		if i is HitboxComponent:
+			var hitbox = i as HitboxComponent
+			var atk = Attack.new()
+			atk.knockback_force = 10.0
+			atk.attack_position = self.global_position
+			atk.damage = self.damage
+			hitbox.damage(atk)
+		#if i.has_method('damage'):
+			#var attack = Attack.new()
+			#attack.damage = damage
+			#i.damage(attack)
 
 func _ready() -> void:
 	if magnet_action:
 		self.add_child(magnet_action)
 		magnet_action.position = Vector2.ZERO
+		magnet_action.collect.connect(inventory.collect)
+		
 	attack.connect(_on_attack)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var x : int = 0
 	var y : int = 0
 	
@@ -79,9 +92,16 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite.play('walking')
 
-	animated_sprite.flip_h = direction.x < 0
-	
-	attack_area.get_node('Shape').position.x = -abs(attack_area.get_node('Shape').position.x)  if (direction.x < 0) else abs(attack_area.get_node('Shape').position.x)
+
+	# Verifica se houve mudança de direção no eixo X
+	if velocity.x != 0 and sign(velocity.x) != sign(last_x):
+		animated_sprite.flip_h = (velocity.x < 0)  # True se estiver indo para a esquerda
+
+	# Atualiza o último valor de direção no eixo X
+	if velocity.x != 0:
+		last_x = velocity.x
+		
+	attack_area.get_node('Shape').position.x = -abs(attack_area.get_node('Shape').position.x)  if (animated_sprite.flip_h) else abs(attack_area.get_node('Shape').position.x)
 	
 	var target_velocity = direction * SPEED
 	_velocity += (target_velocity - _velocity) * friction
