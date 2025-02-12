@@ -35,7 +35,7 @@ func _ready() -> void:
 	if health_component:
 		init_health(health_component.MAX_HEALTH)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if health_component:
 		if self.health != health_component.health:
 			self.health = health_component.health

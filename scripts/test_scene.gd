@@ -33,10 +33,6 @@ func _ready() -> void:
 	var player: PlayerCharacter = main_scene.get_node('player/CharacterBody2D')
 	hud.assign_inventory(player.inventory)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
 func _on_collect() -> void:
 	var new_item: Node2D = [gold_scn, meat_scn, wood_scn].pick_random().instantiate()
 	var player: Node2D = main_scene.get_node('player')

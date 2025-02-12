@@ -15,8 +15,3 @@ func _ready() -> void:
 	self.limit_left = 0
 	self.limit_right = worldSize.x
 	self.limit_bottom = worldSize.y
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

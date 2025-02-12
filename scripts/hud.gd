@@ -52,12 +52,6 @@ func _ready() -> void:
 	wood_qty = 0
 	collect.connect(play_pickup)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
-	
 func update_current_hp(value: int): 
 	current_hp = value
 	$HP/HpLabel.text = '❤️ ' + str(current_hp)

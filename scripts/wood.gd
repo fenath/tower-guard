@@ -8,7 +8,7 @@ var state: Node2D = null
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 #Verificação da colisão do wood com player
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	hide()
 	wood_up.emit()
 	queue_free()

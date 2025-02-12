@@ -15,7 +15,7 @@ func prepare_target() -> void:
 func _ready() -> void:
 	call_deferred('prepare_target')
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if navigation_agent.is_navigation_finished():
 		return
 		
