@@ -11,7 +11,7 @@ const WOOD = preload("res://prefabs/wood.tscn")
 @onready var hit_animation: AnimationPlayer = $HitAnimation
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 
-func damage() -> void:
+func damage(attack: Attack) -> void:
 	if health_component.health <= 0:
 		return
 	sprite.play('hit')
