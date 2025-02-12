@@ -119,5 +119,44 @@ frame_progress = 1.0
 [node name="Tree" parent="." instance=ExtResource("12_53pmu")]
 position = Vector2(969, 943)
 
+[node name="Sheep2" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(563, 800)
+
+[node name="Sheep3" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(392, 784)
+
+[node name="Sheep4" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(722, 686)
+
+[node name="Sheep5" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(730, 781)
+
+[node name="Sheep6" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(206, 808)
+
+[node name="Sheep7" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1004, 644)
+
+[node name="Sheep8" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1121, 696)
+
+[node name="Sheep9" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1351, 944)
+
+[node name="Sheep10" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1391, 661)
+
+[node name="Sheep11" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1634, 1158)
+
+[node name="Sheep12" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1204, 1642)
+
+[node name="Sheep13" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1838, 1608)
+
+[node name="Sheep14" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(1455, 1544)
+
 [node name="Sheep" parent="." instance=ExtResource("11_uqp6s")]
 position = Vector2(556, 473)

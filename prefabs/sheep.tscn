@@ -1,13 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://bou6rky8jvdmr"]
+[gd_scene load_steps=31 format=3 uid="uid://bou6rky8jvdmr"]
 
 [ext_resource type="Texture2D" uid="uid://b5s8lkrg0j0j1" path="res://assets/Resources/Sheep/HappySheep_Idle.png" id="1_lgovn"]
 [ext_resource type="Script" path="res://scripts/sheep.gd" id="1_qs77e"]
 [ext_resource type="PackedScene" uid="uid://io7jjehpxqir" path="res://scenes/components/hitbox_component.tscn" id="2_oxvx7"]
 [ext_resource type="Script" path="res://scripts/health_component.gd" id="2_ycipw"]
+[ext_resource type="Texture2D" uid="uid://cpaof3cgh5w80" path="res://assets/Resources/Sheep/HappySheep_Bouncing.png" id="3_1upnk"]
 [ext_resource type="PackedScene" uid="uid://bu2pk8tju85xu" path="res://scenes/health_bar.tscn" id="4_krxru"]
+[ext_resource type="PackedScene" uid="uid://dvle86etxch48" path="res://scenes/components/knockback_component.tscn" id="5_qflnu"]
 [ext_resource type="PackedScene" uid="uid://cboi10dwwujxm" path="res://prefabs/effects/hit_animation.tscn" id="6_tfhpn"]
 [ext_resource type="Script" path="res://scripts/drop_items.gd" id="7_3b5mt"]
 [ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="8_pxsnm"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="9_ya02d"]
+[ext_resource type="Script" path="res://scripts/idle.gd" id="10_liamn"]
+[ext_resource type="Script" path="res://scripts/escape.gd" id="12_rqfsc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy5yh"]
 atlas = ExtResource("1_lgovn")
@@ -41,6 +46,30 @@ region = Rect2(768, 0, 128, 128)
 atlas = ExtResource("1_lgovn")
 region = Rect2(896, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ik0p"]
+atlas = ExtResource("3_1upnk")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g164v"]
+atlas = ExtResource("3_1upnk")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h4s2"]
+atlas = ExtResource("3_1upnk")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5eihk"]
+atlas = ExtResource("3_1upnk")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f568"]
+atlas = ExtResource("3_1upnk")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nplwa"]
+atlas = ExtResource("3_1upnk")
+region = Rect2(640, 0, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_uweta"]
 animations = [{
 "frames": [{
@@ -69,7 +98,30 @@ animations = [{
 "texture": SubResource("AtlasTexture_mm1e4")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ik0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g164v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7h4s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5eihk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6f568")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nplwa")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 10.0
 }]
 
@@ -85,12 +137,17 @@ script = ExtResource("1_qs77e")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uweta")
+animation = &"walk"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_oxvx7")]
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_byhft")
+
+[node name="KnockbackComponent" parent="." node_paths=PackedStringArray("hitbox", "body") instance=ExtResource("5_qflnu")]
+hitbox = NodePath("../HitboxComponent")
+body = NodePath("..")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("2_ycipw")
@@ -115,3 +172,15 @@ script = ExtResource("7_3b5mt")
 MIN_DROP = 1
 MAX_DROP = 4
 item = ExtResource("8_pxsnm")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_ya02d")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("10_liamn")
+character = NodePath("../..")
+
+[node name="Escape" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("12_rqfsc")
+character = NodePath("../..")
