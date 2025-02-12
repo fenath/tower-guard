@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=21 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="3_617g2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="7_52rrg"]
 [ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="7_m1s7h"]
 [ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="8_xnn5u"]
+[ext_resource type="PackedScene" uid="uid://bou6rky8jvdmr" path="res://prefabs/sheep.tscn" id="11_uqp6s"]
 [ext_resource type="PackedScene" uid="uid://bm5i5qwn085kf" path="res://prefabs/tree.tscn" id="12_53pmu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
@@ -117,3 +118,6 @@ frame_progress = 1.0
 
 [node name="Tree" parent="." instance=ExtResource("12_53pmu")]
 position = Vector2(969, 943)
+
+[node name="Sheep" parent="." instance=ExtResource("11_uqp6s")]
+position = Vector2(556, 473)

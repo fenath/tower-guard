@@ -41,13 +41,18 @@ func stop_attack() -> void:
 func deal_damage() -> void:
 	await get_tree().create_timer(0.2).timeout
 	
-	var colliders = attack_area.get_overlapping_bodies()
+	var colliders = attack_area.get_overlapping_areas()
 	
 	for i in colliders:
-		if i.has_method('damage'):
+		if i is HitboxComponent:
+			var hitbox = i as HitboxComponent
 			var attack = Attack.new()
-			attack.damage = damage
-			i.damage(attack)
+			attack.damage = self.damage
+			hitbox.damage(attack)
+		#if i.has_method('damage'):
+			#var attack = Attack.new()
+			#attack.damage = damage
+			#i.damage(attack)
 
 func _ready() -> void:
 	if magnet_action:

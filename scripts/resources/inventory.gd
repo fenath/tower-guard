@@ -1,5 +1,8 @@
 class_name Inventory extends Node
 
+# O inventário é onde armazenamos como dados as informações de itens que o 
+# personagem possui
+
 var wood_qty: int = 0
 var gold_qty: int = 0
 var meat_qty: int = 0
