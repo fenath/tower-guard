@@ -19,6 +19,8 @@ var _velocity = Vector2.ZERO
 var direction: Vector2 = Vector2.ZERO
 var damage = 1
 
+var last_x: float = 0.0
+
 var is_attacking: bool = false
 
 func _on_attack() -> void:
@@ -90,9 +92,16 @@ func _physics_process(_delta: float) -> void:
 		else:
 			animated_sprite.play('walking')
 
-	animated_sprite.flip_h = direction.x < 0
-	
-	attack_area.get_node('Shape').position.x = -abs(attack_area.get_node('Shape').position.x)  if (direction.x < 0) else abs(attack_area.get_node('Shape').position.x)
+
+	# Verifica se houve mudança de direção no eixo X
+	if velocity.x != 0 and sign(velocity.x) != sign(last_x):
+		animated_sprite.flip_h = (velocity.x < 0)  # True se estiver indo para a esquerda
+
+	# Atualiza o último valor de direção no eixo X
+	if velocity.x != 0:
+		last_x = velocity.x
+		
+	attack_area.get_node('Shape').position.x = -abs(attack_area.get_node('Shape').position.x)  if (animated_sprite.flip_h) else abs(attack_area.get_node('Shape').position.x)
 	
 	var target_velocity = direction * SPEED
 	_velocity += (target_velocity - _velocity) * friction
