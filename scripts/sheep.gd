@@ -14,7 +14,7 @@ var last_x: float = 0.0
 
 const SPEED = 150.0
 
-func damage(attack: Attack) -> void:
+func damage(_attack: Attack) -> void:
 	hit_animation.play('hit')
 	state_machine.change_to(escape.name)
 	

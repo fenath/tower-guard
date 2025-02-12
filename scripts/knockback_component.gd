@@ -12,7 +12,7 @@ func _ready() -> void:
 	if hitbox:
 		hitbox.hit.connect(_on_hitbox_hit)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if body:
 		body.velocity += _velocity
 		_velocity *= _decay
