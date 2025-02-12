@@ -214,7 +214,7 @@ radius = 34.1321
 y_sort_enabled = true
 position = Vector2(371, 465)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
 y_sort_enabled = true
 collision_mask = 3
 script = ExtResource("1_jrk1o")
