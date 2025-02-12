@@ -46,9 +46,11 @@ func deal_damage() -> void:
 	for i in colliders:
 		if i is HitboxComponent:
 			var hitbox = i as HitboxComponent
-			var attack = Attack.new()
-			attack.damage = self.damage
-			hitbox.damage(attack)
+			var atk = Attack.new()
+			atk.knockback_force = 10.0
+			atk.attack_position = self.global_position
+			atk.damage = self.damage
+			hitbox.damage(atk)
 		#if i.has_method('damage'):
 			#var attack = Attack.new()
 			#attack.damage = damage
@@ -62,7 +64,7 @@ func _ready() -> void:
 		
 	attack.connect(_on_attack)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var x : int = 0
 	var y : int = 0
 	
