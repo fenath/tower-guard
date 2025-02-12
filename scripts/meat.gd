@@ -1,4 +1,4 @@
-extends Area2D
+class_name Meat extends Area2D
 
 signal meat_up #sinal da colisão do meat com player
 

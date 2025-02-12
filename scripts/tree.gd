@@ -8,11 +8,13 @@ const WOOD = preload("res://prefabs/wood.tscn")
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var hit_animation: AnimationPlayer = $HitAnimation
 
 func damage(attack: Attack) -> void:
 	if health_component.health <= 0:
 		return
 	sprite.play('hit')
+	hit_animation.play('hit')	
 	health_component.damage(attack)
 
 func drop_items():
@@ -25,7 +27,7 @@ func drop_items():
 		var angle = randf()
 		var x = cos(angle)
 		var y = sin(angle)
-		new_wood.global_position += 50 * Vector2(x,y)
+		new_wood.drop_to(50 * Vector2(x,y) + self.global_position)
 
 		sprite.play('chopped')
 	print('dropped %s items' % str(wood_qty))

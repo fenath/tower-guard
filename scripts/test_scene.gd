@@ -29,6 +29,9 @@ func _ready() -> void:
 			child.wood_up.connect(hud._on_wood_up)
 			
 	add_enemy()
+	
+	var player: PlayerCharacter = main_scene.get_node('player/CharacterBody2D')
+	hud.assign_inventory(player.inventory)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

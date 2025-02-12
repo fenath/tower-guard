@@ -1,4 +1,4 @@
-extends Area2D
+class_name Gold extends Area2D
 
 signal gold_up #sinal da colisão do gold com player
 

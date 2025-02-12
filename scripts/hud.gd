@@ -1,5 +1,8 @@
 class_name Hud extends Control
 
+# A hud se conecta com o inventário do jogador para ver quantos itens 
+# ele tem. Quando atualizamos o inventário do jogador, o sinal é conectado
+# à função update_inventory_labels
 
 @onready var current_hp: int = 0
 
@@ -7,10 +10,21 @@ class_name Hud extends Control
 @onready var gold_qty: int = 0: set =  _set_gold
 @onready var wood_qty: int = 0: set =  _set_wood
 
+var inventory: Inventory
+
 signal collect
 
 func play_pickup() -> void:
 	$pickupSound.play()
+	
+func assign_inventory(_inventory: Inventory) -> void:
+	inventory = _inventory
+	inventory.inventory_changed.connect(update_inventory_labels)
+	
+func update_inventory_labels() -> void:
+	wood_qty = inventory.wood_qty
+	gold_qty = inventory.gold_qty
+	meat_qty = inventory.meat_qty
 
 func _set_meat(value):
 	meat_qty = value

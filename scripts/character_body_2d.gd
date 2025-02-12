@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name PlayerCharacter extends CharacterBody2D
 
 
 const SPEED = 300.0
@@ -12,6 +12,8 @@ signal attack
 @export var friction: float = 0.28
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea
+
+var inventory: Inventory = Inventory.new()
 
 var _velocity = Vector2.ZERO
 var direction: Vector2 = Vector2.ZERO
@@ -51,6 +53,8 @@ func _ready() -> void:
 	if magnet_action:
 		self.add_child(magnet_action)
 		magnet_action.position = Vector2.ZERO
+		magnet_action.collect.connect(inventory.collect)
+		
 	attack.connect(_on_attack)
 
 func _physics_process(delta: float) -> void:
