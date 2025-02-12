@@ -7,6 +7,7 @@ func start_game():
 	var new_scene = TEST_SCENE.instantiate()
 	get_tree().root.add_child(new_scene)
 	get_tree().current_scene = new_scene
+	queue_free()
 	
 func _on_button_pressed() -> void:
 	start_game()

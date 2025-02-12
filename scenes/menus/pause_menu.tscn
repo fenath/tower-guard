@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxmx3j8krviw5"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_f0pml"]
+[ext_resource type="FontFile" uid="uid://i2wscuyqlt4s" path="res://assets/Effects/Fire/BigBlueTerm437NerdFont-Regular.ttf" id="1_lrj8i"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f0pml")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1206.0
+offset_bottom = 675.0
+color = Color(0, 0.490196, 0.490196, 0.219608)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -32.5
+offset_right = 116.0
+offset_bottom = 32.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lrj8i")
+theme_override_font_sizes/font_size = 56
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lrj8i")
+theme_override_font_sizes/font_size = 56
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
