@@ -1,9 +1,11 @@
 class_name HealthBar extends ProgressBar
 
-@onready var damage_bar = $damage_bar
 @onready var timer = $Timer
+@onready var damage_bar: ProgressBar = $DamageBar
 
 var health = 0 : set = _set_health
+
+@export var health_component: HealthComponent
 
 func init_health(_health: int) -> void:
 	health = _health
@@ -28,3 +30,12 @@ func _set_health(new_health) -> void:
 
 func _on_timer_timeout() -> void:
 	damage_bar.value = health
+	
+func _ready() -> void:
+	if health_component:
+		init_health(health_component.MAX_HEALTH)
+
+func _process(delta: float) -> void:
+	if health_component:
+		if self.health != health_component.health:
+			self.health = health_component.health

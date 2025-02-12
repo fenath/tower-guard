@@ -1,0 +1,117 @@
+[gd_scene load_steps=20 format=3 uid="uid://bou6rky8jvdmr"]
+
+[ext_resource type="Texture2D" uid="uid://b5s8lkrg0j0j1" path="res://assets/Resources/Sheep/HappySheep_Idle.png" id="1_lgovn"]
+[ext_resource type="Script" path="res://scripts/sheep.gd" id="1_qs77e"]
+[ext_resource type="PackedScene" uid="uid://io7jjehpxqir" path="res://scenes/components/hitbox_component.tscn" id="2_oxvx7"]
+[ext_resource type="Script" path="res://scripts/health_component.gd" id="2_ycipw"]
+[ext_resource type="PackedScene" uid="uid://bu2pk8tju85xu" path="res://scenes/health_bar.tscn" id="4_krxru"]
+[ext_resource type="PackedScene" uid="uid://cboi10dwwujxm" path="res://prefabs/effects/hit_animation.tscn" id="6_tfhpn"]
+[ext_resource type="Script" path="res://scripts/drop_items.gd" id="7_3b5mt"]
+[ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="8_pxsnm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy5yh"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30g1r"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8ctw"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml2t2"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj7wv"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm8by"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n2fs"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm1e4"]
+atlas = ExtResource("1_lgovn")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uweta"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xy5yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30g1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8ctw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml2t2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj7wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm8by")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n2fs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm1e4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_byhft"]
+radius = 19.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fq8fe"]
+radius = 8.0
+height = 34.0
+
+[node name="Sheep" type="CharacterBody2D"]
+script = ExtResource("1_qs77e")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uweta")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_oxvx7")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_byhft")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_ycipw")
+MAX_HEALTH = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_fq8fe")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_krxru")]
+offset_left = -22.0
+offset_top = -26.0
+offset_right = 28.0
+offset_bottom = -20.0
+health_component = NodePath("../HealthComponent")
+
+[node name="HitAnimation" parent="." instance=ExtResource("6_tfhpn")]
+
+[node name="DropItems" type="Node2D" parent="."]
+script = ExtResource("7_3b5mt")
+MIN_DROP = 1
+MAX_DROP = 4
+item = ExtResource("8_pxsnm")

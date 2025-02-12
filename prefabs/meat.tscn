@@ -64,9 +64,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kqexr")
 }],
-"loop": true,
+"loop": false,
 "name": &"spawn",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u7buq"]
@@ -79,7 +79,7 @@ script = ExtResource("1_fspv4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nekuw")
-animation = &"idle"
+animation = &"spawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 14)

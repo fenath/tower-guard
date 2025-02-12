@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bm5i5qwn085kf"]
+[gd_scene load_steps=16 format=3 uid="uid://bm5i5qwn085kf"]
 
 [ext_resource type="Texture2D" uid="uid://dfhun0rxuho42" path="res://assets/Resources/Trees/Tree.png" id="1_ev32q"]
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_r4wqh"]
 [ext_resource type="Script" path="res://scripts/health_component.gd" id="3_536mh"]
 [ext_resource type="PackedScene" uid="uid://cboi10dwwujxm" path="res://prefabs/effects/hit_animation.tscn" id="4_qtakn"]
+[ext_resource type="Script" path="res://scripts/hitbox_component.gd" id="4_vpb1d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aja1u"]
 atlas = ExtResource("1_ev32q")
@@ -75,6 +76,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onxyc"]
 size = Vector2(25, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkd5u"]
+size = Vector2(51, 124)
+
 [node name="Tree" type="StaticBody2D"]
 collision_mask = 3
 script = ExtResource("1_r4wqh")
@@ -89,5 +93,13 @@ script = ExtResource("3_536mh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 54)
 shape = SubResource("RectangleShape2D_onxyc")
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("4_vpb1d")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0.5, 12)
+shape = SubResource("RectangleShape2D_pkd5u")
 
 [node name="HitAnimation" parent="." instance=ExtResource("4_qtakn")]

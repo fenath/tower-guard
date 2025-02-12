@@ -9,13 +9,13 @@ const WOOD = preload("res://prefabs/wood.tscn")
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hit_animation: AnimationPlayer = $HitAnimation
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
 
-func damage(attack: Attack) -> void:
+func damage() -> void:
 	if health_component.health <= 0:
 		return
 	sprite.play('hit')
 	hit_animation.play('hit')	
-	health_component.damage(attack)
 
 func drop_items():
 	var wood_qty = randi_range(MIN_DROP, MAX_DROP)
@@ -39,6 +39,8 @@ func _ready() -> void:
 	health_component.MAX_HEALTH = 3
 	health_component.health = 3
 	health_component.die.connect(drop_items)
+	hitbox_component.hit.connect(damage)
+	
 	
 func _sprite_finished() -> void:
 	if sprite.animation == 'chopped':
