@@ -16,7 +16,9 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_main_menu_button_pressed() -> void:
+	if MAIN_MENU == null:
+		print("Error: MAIN_MENU scene failed to load!")
+		return
 	var new_scene = MAIN_MENU.instantiate()
-	get_tree().root.add_child(new_scene)
-	get_tree().current_scene = new_scene
+	get_tree().change_scene_to_packed(MAIN_MENU)
 	queue_free()

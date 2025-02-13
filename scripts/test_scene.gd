@@ -47,4 +47,7 @@ func _on_collect() -> void:
 	
 func game_over() -> void:
 	var game_over_screen: GameOverScreen = main_scene.get_node('CanvasLayer2/GameOverScreen')
+	if !game_over_screen:
+		print("game over scene não encontrada")
+		return
 	game_over_screen.show_game_over()
