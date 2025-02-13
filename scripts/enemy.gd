@@ -15,6 +15,7 @@ var last_x: float = 0.0
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine: StateMachine = $StateMachine
+@onready var attack_area: Area2D = $AttackArea
 
 
 func _ready() -> void:
@@ -40,10 +41,16 @@ func _process(_delta: float) -> void:
 	if velocity.x != 0 and sign(velocity.x) != sign(last_x):
 		sprite.flip_h = (velocity.x < 0)  # True se estiver indo para a esquerda
 
+	attack_area.get_node('Shape').position.x = abs(attack_area.get_node('Shape').position.x)
+	if sprite.flip_h:
+		var x : float = attack_area.get_node('Shape').position.x
+		attack_area.get_node('Shape').position.x *= -1
+		
 	# Atualiza o último valor de direção no eixo X
 	if velocity.x != 0:
 		last_x = velocity.x
 	
+
 
 func _on_hit(_atk: Attack) -> void:
 	hit_animation.play('hit')

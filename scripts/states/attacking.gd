@@ -7,6 +7,7 @@ var target: Node2D
 
 var wait_time: float = 0.0
 var is_attacking: bool = false
+var hit_list: Array[HitboxComponent] = []
 
 @onready var animated_sprite: AnimatedSprite2D = $"../../Sprite"
 @onready var attack_area: Area2D = $"../../AttackArea"
@@ -17,18 +18,19 @@ func reset_wait_time() -> void:
 	wait_time = 0.5
 
 func Enter() -> void:
+	if not attack_area.area_entered.is_connected(_on_attack_area_area_entered):
+		attack_area.area_entered.connect(_on_attack_area_area_entered)
+	attack_area.monitoring = false
 	if !target:
 		target = get_tree().get_first_node_in_group("player")
 	
 func Exit() -> void:
-	pass
+	attack_area.area_entered.disconnect(_on_attack_area_area_entered)
+	attack_area.monitoring = false
 	
 func Update(_delta: float) -> void:
 	if wait_time > 0:
 		wait_time -= _delta
-	attack_area.position = abs(attack_area.position)
-	if animated_sprite.flip_h:
-		attack_area.position *= -1
 	
 func PhysicsUpdate(_delta: float) -> void:
 	# espera o cooldown
@@ -53,21 +55,34 @@ func attack() -> void:
 	# esta linha está tanto aqui quanto no enemy.gd, ainda não sei onde deixá-la
 	animated_sprite.play("attack") 
 	await get_tree().create_timer(0.1 * 3).timeout
-	deal_damage()
+	attack_area.monitoring = true
+	
 	await animated_sprite.animation_finished
 	is_attacking = false
+	attack_area.monitoring = false
+	clear_hitbox_list()
 	reset_wait_time()
 
-func deal_damage() -> void:
-	var colliders = attack_area.get_overlapping_areas()
+func _on_attack_area_area_entered(area: Area2D) -> void:
 	
-	for area in colliders:
-		if !area.get_parent().is_in_group("player"):
-			continue
-		if area is HitboxComponent:
-			var hitbox = area as HitboxComponent
-			var atk = Attack.new()
-			atk.knockback_force = 10.0
-			atk.attack_position = character.global_position
-			atk.damage = character.DAMAGE
-			hitbox.damage(atk)
+	if !area.get_parent().is_in_group("player"):
+		return
+	if area is HitboxComponent:
+		var hitbox = area as HitboxComponent
+		if has_hitten(hitbox):
+			return
+		var atk = Attack.new()
+		atk.knockback_force = 10.0
+		atk.attack_position = character.global_position
+		atk.damage = character.DAMAGE
+		hitbox.damage(atk)
+		add_hitbox(hitbox)
+
+func add_hitbox(hb: HitboxComponent) -> void:
+	hit_list.append(hb)
+	
+func clear_hitbox_list() -> void:
+	hit_list.clear()
+	
+func has_hitten(hb: HitboxComponent) -> bool:
+	return hit_list.has(hb)

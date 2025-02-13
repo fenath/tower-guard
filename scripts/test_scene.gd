@@ -33,6 +33,7 @@ func _ready() -> void:
 	var player: PlayerCharacter = main_scene.get_node('player/CharacterBody2D')
 	hud.assign_inventory(player.inventory)
 	hud.assign_player_health_component(player.health_component)
+	player.health_component.die.connect(game_over)
 
 func _on_collect() -> void:
 	var new_item: Node2D = [gold_scn, meat_scn, wood_scn].pick_random().instantiate()
@@ -44,3 +45,6 @@ func _on_collect() -> void:
 	main_scene.get_node('resources').add_child(new_item)
 	new_item.global_position = new_item_position + player.global_position
 	
+func game_over() -> void:
+	var game_over_screen: GameOverScreen = main_scene.get_node('CanvasLayer2/GameOverScreen')
+	game_over_screen.show_game_over()
