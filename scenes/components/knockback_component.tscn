@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/knockback_component.gd" id="1_mpyog"]
 
-[node name="KnockbackComponent" type="Node2D" node_paths=PackedStringArray("hitbox", "body")]
+[node name="KnockbackComponent" type="Node2D"]
 script = ExtResource("1_mpyog")
-hitbox = NodePath("")
-body = NodePath("")
+intensity = 1.0
