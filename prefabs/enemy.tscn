@@ -1,10 +1,19 @@
-[gd_scene load_steps=24 format=3 uid="uid://cqndhocdt7dso"]
+[gd_scene load_steps=35 format=3 uid="uid://cqndhocdt7dso"]
 
 [ext_resource type="Texture2D" uid="uid://dvotad0vy67hq" path="res://assets/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_6jcrq"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_jwbne"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_pr4ii"]
+[ext_resource type="Script" path="res://scripts/states/chasing.gd" id="4_di2fx"]
+[ext_resource type="PackedScene" uid="uid://bbwglqm1aagrv" path="res://scenes/components/health_component.tscn" id="5_nas2i"]
+[ext_resource type="Script" path="res://scripts/states/enemy_idle.gd" id="5_ys7ir"]
+[ext_resource type="PackedScene" uid="uid://bu2pk8tju85xu" path="res://scenes/health_bar.tscn" id="6_3ddq0"]
+[ext_resource type="Script" path="res://scripts/states/attacking.gd" id="6_ui67e"]
+[ext_resource type="PackedScene" uid="uid://io7jjehpxqir" path="res://scenes/components/hitbox_component.tscn" id="7_f0d6m"]
+[ext_resource type="Script" path="res://scripts/knockback_component.gd" id="7_sbtd5"]
+[ext_resource type="PackedScene" uid="uid://cboi10dwwujxm" path="res://prefabs/effects/hit_animation.tscn" id="9_v1f85"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ge2oi"]
-radius = 23.0217
+radius = 21.0238
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mai6f"]
 atlas = ExtResource("1_6jcrq")
@@ -103,7 +112,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cr3gk")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 10.0
 }, {
@@ -157,19 +166,73 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfpnv"]
+radius = 31.0161
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3h07p"]
+radius = 41.0
+
 [node name="enemy" type="CharacterBody2D"]
 script = ExtResource("1_jwbne")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_ge2oi")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dcaq6")
-animation = &"run"
-frame_progress = 0.176552
+animation = &"attack"
+frame = 3
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
 path_postprocessing = 1
 avoidance_enabled = true
 debug_enabled = true
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_pr4ii")
+initial_state = NodePath("Chasing")
+
+[node name="Chasing" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("4_di2fx")
+character = NodePath("../..")
+
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("5_ys7ir")
+character = NodePath("../..")
+
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("6_ui67e")
+character = NodePath("../..")
+
+[node name="KnockbackComponent" type="Node2D" parent="." node_paths=PackedStringArray("hitbox", "body", "sprite")]
+script = ExtResource("7_sbtd5")
+hitbox = NodePath("../HitboxComponent")
+body = NodePath("..")
+sprite = NodePath("../Sprite")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_nas2i")]
+MAX_HEALTH = 70
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_3ddq0")]
+offset_left = -30.0
+offset_top = -50.0
+offset_right = 30.0
+offset_bottom = -44.0
+size_flags_horizontal = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_f0d6m")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_yfpnv")
+
+[node name="HitAnimation" parent="." instance=ExtResource("9_v1f85")]
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(38, -5)
+shape = SubResource("CircleShape2D_3h07p")
