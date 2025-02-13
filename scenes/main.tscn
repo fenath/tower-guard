@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bou6rky8jvdmr" path="res://prefabs/sheep.tscn" id="11_uqp6s"]
 [ext_resource type="PackedScene" uid="uid://bm5i5qwn085kf" path="res://prefabs/tree.tscn" id="12_53pmu"]
 [ext_resource type="PackedScene" uid="uid://cxmx3j8krviw5" path="res://scenes/menus/pause_menu.tscn" id="13_eflj3"]
-[ext_resource type="PackedScene" path="res://scenes/menus/game_over_screen.tscn" id="13_yglaw"]
+[ext_resource type="PackedScene" uid="uid://ciuv5atqspy81" path="res://scenes/menus/game_over_screen.tscn" id="13_inbjo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
 radius = 25.0
@@ -167,5 +167,4 @@ position = Vector2(556, 473)
 
 [node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("13_eflj3")]
 
-[node name="GameOverScreen" parent="CanvasLayer2" instance=ExtResource("13_yglaw")]
-metadata/_edit_use_anchors_ = true
+[node name="GameOverScreen" parent="CanvasLayer2" instance=ExtResource("13_inbjo")]

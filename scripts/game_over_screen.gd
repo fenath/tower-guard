@@ -19,6 +19,5 @@ func _on_main_menu_button_pressed() -> void:
 	if MAIN_MENU == null:
 		print("Error: MAIN_MENU scene failed to load!")
 		return
-	var new_scene = MAIN_MENU.instantiate()
 	get_tree().change_scene_to_packed(MAIN_MENU)
-	queue_free()
+	#queue_free()
