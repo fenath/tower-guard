@@ -1,7 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://5yb87rj3pedw"]
-
-[ext_resource type="Shader" path="res://shaders/tree.gdshader" id="1_620s8"]
-
-[resource]
-shader = ExtResource("1_620s8")
-shader_parameter/in_color = Vector4(1, 1, 1, 0)
