@@ -45,10 +45,10 @@ func set_state(state_name):
 		current_state.Exit()
 		current_state.set_process(false)
 		current_state.set_physics_process(false)
-		current_state.hide()
+		#current_state.hide()
 
 	current_state = states[state_name]
 	current_state.Enter()
 	current_state.set_process(true)
 	current_state.set_physics_process(true)
-	current_state.show()
+	#current_state.show()
