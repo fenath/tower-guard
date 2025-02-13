@@ -1,4 +1,5 @@
 extends Control
+@onready var animation: AnimationPlayer = $Animation
 
 var _is_paused: bool = false:
 	set = set_paused
@@ -6,7 +7,14 @@ var _is_paused: bool = false:
 func set_paused(new_pause: bool) -> void:
 	_is_paused = new_pause
 	get_tree().paused = _is_paused
-	visible = _is_paused
+	if _is_paused:
+		visible = _is_paused
+		animation.play('blur')
+	else:
+		animation.play_backwards('blur')
+		await animation.animation_finished
+		visible = _is_paused
+		
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed('ui_cancel'):

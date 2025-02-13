@@ -1,7 +1,113 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxmx3j8krviw5"]
+[gd_scene load_steps=12 format=3 uid="uid://cxmx3j8krviw5"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_f0pml"]
 [ext_resource type="FontFile" uid="uid://i2wscuyqlt4s" path="res://assets/Effects/Fire/BigBlueTerm437NerdFont-Regular.ttf" id="1_lrj8i"]
+[ext_resource type="Shader" path="res://shaders/pause_menu.gdshader" id="2_aq1oo"]
+[ext_resource type="Texture2D" uid="uid://djbp4vd1byr6b" path="res://assets/UI/Buttons/Button_Blue_3Slides.png" id="2_vsq2g"]
+[ext_resource type="Texture2D" uid="uid://dw2cwkdrfr4n4" path="res://assets/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="3_h5qxf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0l1u"]
+shader = ExtResource("2_aq1oo")
+shader_parameter/amount = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_tl86b"]
+font = ExtResource("1_lrj8i")
+font_size = 48
+font_color = Color(1, 0.988235, 0.905882, 1)
+outline_size = 10
+outline_color = Color(0.0862745, 0.109804, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ghot5"]
+font = ExtResource("1_lrj8i")
+font_size = 24
+font_color = Color(1, 0.988235, 0.905882, 1)
+outline_size = 8
+outline_color = Color(0.0862745, 0.109804, 0.180392, 1)
+
+[sub_resource type="Animation" id="Animation_t1miy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.399428, 0.399428, 0.399428, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hpptg"]
+resource_name = "blur"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.399428, 0.399428, 0.399428, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5byg"]
+_data = {
+"RESET": SubResource("Animation_t1miy"),
+"blur": SubResource("Animation_hpptg")
+}
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -14,10 +120,12 @@ grow_vertical = 2
 script = ExtResource("1_f0pml")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0.399428, 0.399428, 0.399428, 1)
+material = SubResource("ShaderMaterial_f0l1u")
 layout_mode = 0
 offset_right = 1206.0
 offset_bottom = 675.0
-color = Color(0, 0.490196, 0.490196, 0.219608)
+color = Color(0.130014, 0.108216, 0.128932, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -36,17 +144,63 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_lrj8i")
-theme_override_font_sizes/font_size = 56
-text = "Resume"
+text = "Paused"
+label_settings = SubResource("LabelSettings_tl86b")
+horizontal_alignment = 1
 
-[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_lrj8i")
-theme_override_font_sizes/font_size = 56
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_vsq2g")
+texture_pressed = ExtResource("3_h5qxf")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ResumeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -17.0
+offset_right = 48.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume
+"
+label_settings = SubResource("LabelSettings_ghot5")
+
+[node name="QuitButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_vsq2g")
+texture_pressed = ExtResource("3_h5qxf")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -17.0
+offset_right = 48.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Quit"
+label_settings = SubResource("LabelSettings_ghot5")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r5byg")
+}
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_resume_button_pressed"]
