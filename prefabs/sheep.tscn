@@ -145,10 +145,6 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_byhft")
 
-[node name="KnockbackComponent" parent="." node_paths=PackedStringArray("hitbox", "body") instance=ExtResource("5_qflnu")]
-hitbox = NodePath("../HitboxComponent")
-body = NodePath("..")
-
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("2_ycipw")
 MAX_HEALTH = 5
@@ -184,3 +180,7 @@ character = NodePath("../..")
 [node name="Escape" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
 script = ExtResource("12_rqfsc")
 character = NodePath("../..")
+
+[node name="KnockbackComponent" parent="." node_paths=PackedStringArray("hitbox", "body") instance=ExtResource("5_qflnu")]
+hitbox = NodePath("../HitboxComponent")
+body = NodePath("..")
