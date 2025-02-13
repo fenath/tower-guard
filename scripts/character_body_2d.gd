@@ -1,17 +1,17 @@
 class_name PlayerCharacter extends CharacterBody2D
 
-
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
 signal attack
 
 @onready var magnet_action: MagnetAction = preload(
 	"res://scenes/magnet_action.tscn"
 	).instantiate() as MagnetAction
 @export var friction: float = 0.28
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $Sprite
 @onready var attack_area: Area2D = $AttackArea
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var hit_animation: AnimationPlayer = $Sprite/HitAnimation
 
 var inventory: Inventory = Inventory.new()
 
@@ -28,12 +28,8 @@ func _on_attack() -> void:
 		return
 	is_attacking = true
 	animated_sprite.play('attacking')
-	var timer = Timer.new()
-	timer.one_shot = true
-	timer.wait_time = 0.2
-	add_child(timer)
-	timer.timeout.connect(deal_damage)
-	timer.start()
+	await get_tree().create_timer(0.2).timeout
+	deal_damage()
 	animated_sprite.animation_finished.connect(stop_attack)
 
 func stop_attack() -> void:
@@ -46,6 +42,9 @@ func deal_damage() -> void:
 	var colliders = attack_area.get_overlapping_areas()
 	
 	for i in colliders:
+		if i.get_parent().is_in_group('player'):
+			continue
+			
 		if i is HitboxComponent:
 			var hitbox = i as HitboxComponent
 			var atk = Attack.new()
@@ -53,18 +52,21 @@ func deal_damage() -> void:
 			atk.attack_position = self.global_position
 			atk.damage = self.damage
 			hitbox.damage(atk)
-		#if i.has_method('damage'):
-			#var attack = Attack.new()
-			#attack.damage = damage
-			#i.damage(attack)
 
 func _ready() -> void:
 	if magnet_action:
 		self.add_child(magnet_action)
 		magnet_action.position = Vector2.ZERO
 		magnet_action.collect.connect(inventory.collect)
+	
+	hitbox_component.hit.connect(_on_hit_taken)
 		
 	attack.connect(_on_attack)
+
+
+func _on_hit_taken(atk: Attack) -> void:
+	health_component.damage(atk)
+	hit_animation.play('hit')
 
 func _physics_process(_delta: float) -> void:
 	var x : int = 0

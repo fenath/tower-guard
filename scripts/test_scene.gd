@@ -32,6 +32,7 @@ func _ready() -> void:
 	
 	var player: PlayerCharacter = main_scene.get_node('player/CharacterBody2D')
 	hud.assign_inventory(player.inventory)
+	hud.assign_player_health_component(player.health_component)
 
 func _on_collect() -> void:
 	var new_item: Node2D = [gold_scn, meat_scn, wood_scn].pick_random().instantiate()
