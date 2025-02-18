@@ -10,6 +10,8 @@ class_name Hud extends Control
 @onready var gold_qty: int = 0: set =  _set_gold
 @onready var wood_qty: int = 0: set =  _set_wood
 
+var player_health_component: HealthComponent = null
+
 var inventory: Inventory
 
 signal collect
@@ -21,6 +23,9 @@ func assign_inventory(_inventory: Inventory) -> void:
 	inventory = _inventory
 	inventory.inventory_changed.connect(update_inventory_labels)
 	
+func assign_player_health_component(_health: HealthComponent) -> void:
+	player_health_component = _health
+
 func update_inventory_labels() -> void:
 	wood_qty = inventory.wood_qty
 	gold_qty = inventory.gold_qty
@@ -56,6 +61,11 @@ func update_current_hp(value: int):
 	current_hp = value
 	$HP/HpLabel.text = '❤️ ' + str(current_hp)
 
+func _process(_delta: float) -> void:
+	if !player_health_component:
+		return
+	if current_hp != player_health_component.health:
+		update_current_hp(player_health_component.health)
 
 func _on_button_pressed() -> void:
 	update_current_hp(current_hp + 1)

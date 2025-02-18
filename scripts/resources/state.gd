@@ -1,4 +1,4 @@
-class_name State extends Node2D
+class_name State extends Node
 
 var fsm: StateMachine = null
 

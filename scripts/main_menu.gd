@@ -1,12 +1,15 @@
 extends Node2D
 
-const TEST_SCENE = preload("res://scenes/test/test_scene.tscn")
+@onready var TEST_SCENE = load("res://scenes/test/test_scene.tscn")
 
 
 func start_game():
-	var new_scene = TEST_SCENE.instantiate()
-	get_tree().root.add_child(new_scene)
-	get_tree().current_scene = new_scene
+	if TEST_SCENE == null:
+		print("Test scene failed to load")
+		return
 	
+	get_tree().change_scene_to_packed(TEST_SCENE)
+
+
 func _on_button_pressed() -> void:
 	start_game()
