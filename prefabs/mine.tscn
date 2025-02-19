@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbi36alg8c4eu"]
+
+[ext_resource type="Script" path="res://scripts/mine.gd" id="1_4txka"]
+[ext_resource type="Texture2D" uid="uid://bb2ce03i8nefl" path="res://assets/Resources/Gold Mine/GoldMine_Active.png" id="2_a8dpv"]
+[ext_resource type="Texture2D" uid="uid://1w7ex1occg3o" path="res://assets/Resources/Gold Mine/GoldMine_Destroyed.png" id="3_allhn"]
+[ext_resource type="Texture2D" uid="uid://csl78jx684faa" path="res://assets/Resources/Gold Mine/GoldMine_Inactive.png" id="4_l6wjg"]
+[ext_resource type="PackedScene" uid="uid://cboi10dwwujxm" path="res://prefabs/effects/hit_animation.tscn" id="5_h400t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_apry0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a8dpv")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_allhn")
+}],
+"loop": true,
+"name": &"destroyed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_l6wjg")
+}],
+"loop": true,
+"name": &"inactive",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pq4dn"]
+radius = 38.0183
+height = 94.056
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lpo6j"]
+radius = 39.0036
+height = 124.003
+
+[node name="Mine" type="StaticBody2D"]
+script = ExtResource("1_4txka")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_apry0")
+animation = &"inactive"
+
+[node name="HealthComponent" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, -4)
+rotation = 1.56066
+shape = SubResource("CapsuleShape2D_pq4dn")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-2, -1)
+rotation = 1.57264
+shape = SubResource("CapsuleShape2D_lpo6j")
+
+[node name="HitAnimation" parent="." instance=ExtResource("5_h400t")]
