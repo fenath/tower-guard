@@ -8,3 +8,7 @@ func _on_body_entered(_body):
 	gold_up.emit()
 	queue_free()
 	
+
+	
+
+	

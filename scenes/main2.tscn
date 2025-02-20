@@ -1,0 +1,181 @@
+[gd_scene load_steps=25 format=3 uid="uid://bqyfegfx02gnr"]
+
+[ext_resource type="PackedScene" uid="uid://bn8wiaurr8ao3" path="res://scenes/tiles2.tscn" id="1_x3vgv"]
+[ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="2_jeckm"]
+[ext_resource type="PackedScene" uid="uid://7lsouk5v2cwt" path="res://scenes/player.tscn" id="3_oxgis"]
+[ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="4_j4sou"]
+[ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="5_lird1"]
+[ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="6_e1nba"]
+[ext_resource type="Script" path="res://scripts/gold_entity.gd" id="7_30a1u"]
+[ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="8_brpc1"]
+[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="9_blofc"]
+[ext_resource type="PackedScene" uid="uid://bm5i5qwn085kf" path="res://prefabs/tree.tscn" id="10_vgh7n"]
+[ext_resource type="PackedScene" uid="uid://bou6rky8jvdmr" path="res://prefabs/sheep.tscn" id="11_qcn54"]
+[ext_resource type="PackedScene" uid="uid://cxmx3j8krviw5" path="res://scenes/menus/pause_menu.tscn" id="12_lck56"]
+[ext_resource type="PackedScene" uid="uid://ciuv5atqspy81" path="res://scenes/menus/game_over_screen.tscn" id="13_5ve4u"]
+[ext_resource type="PackedScene" uid="uid://bbi36alg8c4eu" path="res://prefabs/mine.tscn" id="14_gre77"]
+[ext_resource type="PackedScene" uid="uid://cqndhocdt7dso" path="res://prefabs/enemy.tscn" id="15_3qtro"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
+radius = 25.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x4rj"]
+atlas = ExtResource("9_blofc")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7krr"]
+atlas = ExtResource("9_blofc")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfmud"]
+atlas = ExtResource("9_blofc")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0f6a"]
+atlas = ExtResource("9_blofc")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kakst"]
+atlas = ExtResource("9_blofc")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nas8"]
+atlas = ExtResource("9_blofc")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hngpd"]
+atlas = ExtResource("9_blofc")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ouhmi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_brpc1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x4rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7krr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfmud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0f6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kakst")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nas8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hngpd")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 10.0
+}]
+
+[node name="main" type="Node2D"]
+y_sort_enabled = true
+
+[node name="World" parent="." instance=ExtResource("1_x3vgv")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("2_jeckm")]
+
+[node name="player" parent="." instance=ExtResource("3_oxgis")]
+
+[node name="resources" type="Node2D" parent="."]
+
+[node name="meat" parent="resources" instance=ExtResource("4_j4sou")]
+position = Vector2(381, 692)
+
+[node name="gold" parent="resources" instance=ExtResource("5_lird1")]
+position = Vector2(506, 563)
+
+[node name="wood" parent="resources" instance=ExtResource("6_e1nba")]
+position = Vector2(593, 688)
+
+[node name="GoldEntity" type="StaticBody2D" parent="." groups=["resources"]]
+position = Vector2(565, 608)
+script = ExtResource("7_30a1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoldEntity"]
+position = Vector2(6, 9)
+shape = SubResource("CircleShape2D_uk4ba")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GoldEntity"]
+sprite_frames = SubResource("SpriteFrames_ouhmi")
+animation = &"spawn"
+frame = 6
+frame_progress = 1.0
+
+[node name="Tree" parent="." instance=ExtResource("10_vgh7n")]
+position = Vector2(603, 1014)
+
+[node name="Tree2" parent="." instance=ExtResource("10_vgh7n")]
+position = Vector2(2870, 917)
+
+[node name="Tree3" parent="." instance=ExtResource("10_vgh7n")]
+position = Vector2(940, 1640)
+
+[node name="Tree4" parent="." instance=ExtResource("10_vgh7n")]
+position = Vector2(2597, 1849)
+
+[node name="Sheep2" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(1299, 1559)
+
+[node name="Sheep3" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(2509, 1056)
+
+[node name="Sheep4" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(659, 850)
+
+[node name="Sheep5" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(1482, 1234)
+
+[node name="Sheep6" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(3317, 792)
+
+[node name="Sheep7" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(1004, 644)
+
+[node name="Sheep8" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(1010, 753)
+
+[node name="Sheep9" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(1351, 944)
+
+[node name="Sheep10" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(1391, 661)
+
+[node name="Sheep" parent="." instance=ExtResource("11_qcn54")]
+position = Vector2(556, 473)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("12_lck56")]
+
+[node name="GameOverScreen" parent="CanvasLayer2" instance=ExtResource("13_5ve4u")]
+
+[node name="Mine" parent="." instance=ExtResource("14_gre77")]
+position = Vector2(1033, 1299)
+
+[node name="Mine2" parent="." instance=ExtResource("14_gre77")]
+position = Vector2(3108, 567)
+
+[node name="Mine3" parent="." instance=ExtResource("14_gre77")]
+position = Vector2(3644, 1248)
+
+[node name="enemy" parent="." instance=ExtResource("15_3qtro")]
+position = Vector2(1228, 1122)

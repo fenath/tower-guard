@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=24 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="3_617g2"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bm5i5qwn085kf" path="res://prefabs/tree.tscn" id="12_53pmu"]
 [ext_resource type="PackedScene" uid="uid://cxmx3j8krviw5" path="res://scenes/menus/pause_menu.tscn" id="13_eflj3"]
 [ext_resource type="PackedScene" uid="uid://ciuv5atqspy81" path="res://scenes/menus/game_over_screen.tscn" id="13_inbjo"]
+[ext_resource type="PackedScene" uid="uid://bbi36alg8c4eu" path="res://prefabs/mine.tscn" id="14_1p1ub"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
 radius = 25.0
@@ -168,3 +169,6 @@ position = Vector2(556, 473)
 [node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("13_eflj3")]
 
 [node name="GameOverScreen" parent="CanvasLayer2" instance=ExtResource("13_inbjo")]
+
+[node name="Mine" parent="." instance=ExtResource("14_1p1ub")]
+position = Vector2(1481, 887)

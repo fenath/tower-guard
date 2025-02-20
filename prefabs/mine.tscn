@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbi36alg8c4eu"]
+[gd_scene load_steps=13 format=3 uid="uid://bbi36alg8c4eu"]
 
 [ext_resource type="Script" path="res://scripts/mine.gd" id="1_4txka"]
 [ext_resource type="Texture2D" uid="uid://bb2ce03i8nefl" path="res://assets/Resources/Gold Mine/GoldMine_Active.png" id="2_a8dpv"]
 [ext_resource type="Texture2D" uid="uid://1w7ex1occg3o" path="res://assets/Resources/Gold Mine/GoldMine_Destroyed.png" id="3_allhn"]
 [ext_resource type="Texture2D" uid="uid://csl78jx684faa" path="res://assets/Resources/Gold Mine/GoldMine_Inactive.png" id="4_l6wjg"]
 [ext_resource type="PackedScene" uid="uid://cboi10dwwujxm" path="res://prefabs/effects/hit_animation.tscn" id="5_h400t"]
+[ext_resource type="PackedScene" uid="uid://bbwglqm1aagrv" path="res://scenes/components/health_component.tscn" id="6_ji8gc"]
+[ext_resource type="PackedScene" uid="uid://io7jjehpxqir" path="res://scenes/components/hitbox_component.tscn" id="7_sn7yf"]
+[ext_resource type="Script" path="res://scripts/drop_items.gd" id="8_b1d4v"]
+[ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="9_jyk6k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_apry0"]
 animations = [{
@@ -37,29 +41,38 @@ animations = [{
 radius = 38.0183
 height = 94.056
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lpo6j"]
-radius = 39.0036
-height = 124.003
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_88jd5"]
+radius = 41.0
+height = 114.144
 
 [node name="Mine" type="StaticBody2D"]
 script = ExtResource("1_4txka")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_apry0")
-animation = &"inactive"
-
-[node name="HealthComponent" type="Node2D" parent="."]
+animation = &"destroyed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-5, -4)
 rotation = 1.56066
 shape = SubResource("CapsuleShape2D_pq4dn")
 
-[node name="HitboxComponent" type="Area2D" parent="."]
+[node name="HitAnimation" parent="." instance=ExtResource("5_h400t")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_ji8gc")]
+MAX_HEALTH = 3
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_sn7yf")]
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-2, -1)
-rotation = 1.57264
-shape = SubResource("CapsuleShape2D_lpo6j")
+position = Vector2(-1, -4)
+rotation = 1.59728
+shape = SubResource("CapsuleShape2D_88jd5")
 
-[node name="HitAnimation" parent="." instance=ExtResource("5_h400t")]
+[node name="DropItems" type="Node2D" parent="."]
+script = ExtResource("8_b1d4v")
+MIN_DROP = 1
+MAX_DROP = 4
+item = ExtResource("9_jyk6k")

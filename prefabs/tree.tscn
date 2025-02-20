@@ -85,7 +85,7 @@ script = ExtResource("1_r4wqh")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7dcf2")
-animation = &"idle"
+animation = &"hit"
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_536mh")
