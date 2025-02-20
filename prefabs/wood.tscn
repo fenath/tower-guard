@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://br5nrp3rtcimi"]
+[gd_scene load_steps=13 format=3 uid="uid://br5nrp3rtcimi"]
 
 [ext_resource type="Script" path="res://scripts/wood.gd" id="1_mtbca"]
 [ext_resource type="Texture2D" uid="uid://c8rwasm7d80ln" path="res://assets/Resources/Resources/W_Idle.png" id="1_wxc25"]
 [ext_resource type="Texture2D" uid="uid://dmsxrf8m5q8ke" path="res://assets/Resources/Resources/W_Spawn.png" id="2_jxmfh"]
-[ext_resource type="Script" path="res://scripts/resources/dropping.gd" id="4_blvom"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2s5j"]
 atlas = ExtResource("2_jxmfh")
@@ -88,6 +87,3 @@ frame_progress = 1.0
 position = Vector2(0, 23)
 rotation = 1.24615
 shape = SubResource("CapsuleShape2D_8awwb")
-
-[node name="Dropping" type="Node2D" parent="."]
-script = ExtResource("4_blvom")
