@@ -1,9 +1,5 @@
 class_name LevelLoader extends Node
 
-
-#@onready var main_scene := preload("res://scenes/main.tscn").instantiate()
-#@onready var hud: Hud = main_scene.get_node('CanvasLayer/Hud') as Hud
-
 @export var hud: Hud
 @export var main_scene: Node2D
 @export var player_node: Node2D
@@ -44,7 +40,7 @@ func load_scene() -> void:
 	set_camera()
 	
 func _ready() -> void:
-	load_scene()
+	call_deferred('load_scene')
 	
 func game_over() -> void:
 	#var game_over_screen: GameOverScreen = main_scene.get_node('CanvasLayer2/GameOverScreen')
