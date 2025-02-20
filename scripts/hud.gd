@@ -21,7 +21,8 @@ func play_pickup() -> void:
 	
 func assign_inventory(_inventory: Inventory) -> void:
 	inventory = _inventory
-	inventory.inventory_changed.connect(update_inventory_labels)
+	if not inventory.inventory_changed.is_connected(update_inventory_labels):
+		inventory.inventory_changed.connect(update_inventory_labels)
 	
 func assign_player_health_component(_health: HealthComponent) -> void:
 	player_health_component = _health
