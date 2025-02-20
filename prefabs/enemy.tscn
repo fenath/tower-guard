@@ -193,15 +193,17 @@ debug_enabled = true
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_pr4ii")
-initial_state = NodePath("Chasing")
+initial_state = NodePath("Idle")
 
 [node name="Chasing" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
 script = ExtResource("4_di2fx")
 character = NodePath("../..")
+FAR_DISTANCE = 600.0
 
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
 script = ExtResource("5_ys7ir")
 character = NodePath("../..")
+chasing_range = 200.0
 
 [node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
 script = ExtResource("6_ui67e")

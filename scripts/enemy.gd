@@ -23,8 +23,10 @@ func _ready() -> void:
 	hitbox_component.hit.connect(_on_hit)
 	health_component.die.connect(_on_die)
 	chasing.close_to_target.connect(_on_close_to_player)
+	chasing.lost_chasing_range.connect(_on_lost_chasing_range)
 	attacking.lost_range.connect(_on_lost_range)
-	
+	idle.next_to_player.connect(_on_got_next_to_player)
+
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
@@ -62,4 +64,10 @@ func _on_close_to_player() -> void:
 	state_machine.change_to(attacking.name)
 
 func _on_lost_range() -> void:
+	state_machine.change_to(chasing.name)
+	
+func _on_lost_chasing_range() -> void:
+	state_machine.change_to(idle.name)
+	
+func _on_got_next_to_player() -> void:
 	state_machine.change_to(chasing.name)
