@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=25 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="3_617g2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cxmx3j8krviw5" path="res://scenes/menus/pause_menu.tscn" id="13_eflj3"]
 [ext_resource type="PackedScene" uid="uid://ciuv5atqspy81" path="res://scenes/menus/game_over_screen.tscn" id="13_inbjo"]
 [ext_resource type="PackedScene" uid="uid://bbi36alg8c4eu" path="res://prefabs/mine.tscn" id="14_1p1ub"]
+[ext_resource type="PackedScene" uid="uid://c671dawbw8t08" path="res://scenes/components/level_loader.tscn" id="15_k4o5o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
 radius = 25.0
@@ -172,3 +173,10 @@ position = Vector2(556, 473)
 
 [node name="Mine" parent="." instance=ExtResource("14_1p1ub")]
 position = Vector2(1481, 887)
+
+[node name="LevelLoader" parent="." node_paths=PackedStringArray("hud", "main_scene", "player_node", "game_over_screen", "world_tiles") instance=ExtResource("15_k4o5o")]
+hud = NodePath("../CanvasLayer/Hud")
+main_scene = NodePath("..")
+player_node = NodePath("../player")
+game_over_screen = NodePath("../CanvasLayer2/GameOverScreen")
+world_tiles = NodePath("../World")

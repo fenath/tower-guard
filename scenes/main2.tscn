@@ -17,6 +17,13 @@
 [node name="main" type="Node2D"]
 y_sort_enabled = true
 
+[node name="LevelLoader" parent="." node_paths=PackedStringArray("hud", "main_scene", "player_node", "game_over_screen", "world_tiles") instance=ExtResource("16_ucplp")]
+hud = NodePath("../CanvasLayer/Hud")
+main_scene = NodePath("..")
+player_node = NodePath("../player")
+game_over_screen = NodePath("../CanvasLayer2/GameOverScreen")
+world_tiles = NodePath("../World")
+
 [node name="World" parent="." instance=ExtResource("1_x3vgv")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -95,10 +102,3 @@ position = Vector2(3644, 1248)
 
 [node name="enemy" parent="." instance=ExtResource("15_3qtro")]
 position = Vector2(1228, 1122)
-
-[node name="LevelLoader" parent="." node_paths=PackedStringArray("hud", "main_scene", "player_node", "game_over_screen", "world_tiles") instance=ExtResource("16_ucplp")]
-hud = NodePath("../CanvasLayer/Hud")
-main_scene = NodePath("..")
-player_node = NodePath("../player")
-game_over_screen = NodePath("../CanvasLayer2/GameOverScreen")
-world_tiles = NodePath("../World")
