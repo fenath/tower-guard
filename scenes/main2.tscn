@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bqyfegfx02gnr"]
+[gd_scene load_steps=14 format=3 uid="uid://bqyfegfx02gnr"]
 
 [ext_resource type="PackedScene" uid="uid://bn8wiaurr8ao3" path="res://scenes/tiles2.tscn" id="1_x3vgv"]
 [ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="2_jeckm"]
@@ -6,83 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="4_j4sou"]
 [ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="5_lird1"]
 [ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="6_e1nba"]
-[ext_resource type="Script" path="res://scripts/gold_entity.gd" id="7_30a1u"]
-[ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="8_brpc1"]
-[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="9_blofc"]
 [ext_resource type="PackedScene" uid="uid://bm5i5qwn085kf" path="res://prefabs/tree.tscn" id="10_vgh7n"]
 [ext_resource type="PackedScene" uid="uid://bou6rky8jvdmr" path="res://prefabs/sheep.tscn" id="11_qcn54"]
 [ext_resource type="PackedScene" uid="uid://cxmx3j8krviw5" path="res://scenes/menus/pause_menu.tscn" id="12_lck56"]
 [ext_resource type="PackedScene" uid="uid://ciuv5atqspy81" path="res://scenes/menus/game_over_screen.tscn" id="13_5ve4u"]
 [ext_resource type="PackedScene" uid="uid://bbi36alg8c4eu" path="res://prefabs/mine.tscn" id="14_gre77"]
 [ext_resource type="PackedScene" uid="uid://cqndhocdt7dso" path="res://prefabs/enemy.tscn" id="15_3qtro"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
-radius = 25.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6x4rj"]
-atlas = ExtResource("9_blofc")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h7krr"]
-atlas = ExtResource("9_blofc")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yfmud"]
-atlas = ExtResource("9_blofc")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0f6a"]
-atlas = ExtResource("9_blofc")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kakst"]
-atlas = ExtResource("9_blofc")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2nas8"]
-atlas = ExtResource("9_blofc")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hngpd"]
-atlas = ExtResource("9_blofc")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ouhmi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_brpc1")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6x4rj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h7krr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yfmud")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h0f6a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kakst")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2nas8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hngpd")
-}],
-"loop": false,
-"name": &"spawn",
-"speed": 10.0
-}]
+[ext_resource type="PackedScene" uid="uid://c671dawbw8t08" path="res://scenes/components/level_loader.tscn" id="16_ucplp"]
 
 [node name="main" type="Node2D"]
 y_sort_enabled = true
@@ -105,20 +35,6 @@ position = Vector2(506, 563)
 
 [node name="wood" parent="resources" instance=ExtResource("6_e1nba")]
 position = Vector2(593, 688)
-
-[node name="GoldEntity" type="StaticBody2D" parent="." groups=["resources"]]
-position = Vector2(565, 608)
-script = ExtResource("7_30a1u")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GoldEntity"]
-position = Vector2(6, 9)
-shape = SubResource("CircleShape2D_uk4ba")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GoldEntity"]
-sprite_frames = SubResource("SpriteFrames_ouhmi")
-animation = &"spawn"
-frame = 6
-frame_progress = 1.0
 
 [node name="Tree" parent="." instance=ExtResource("10_vgh7n")]
 position = Vector2(603, 1014)
@@ -179,3 +95,10 @@ position = Vector2(3644, 1248)
 
 [node name="enemy" parent="." instance=ExtResource("15_3qtro")]
 position = Vector2(1228, 1122)
+
+[node name="LevelLoader" parent="." node_paths=PackedStringArray("hud", "main_scene", "player_node", "game_over_screen", "world_tiles") instance=ExtResource("16_ucplp")]
+hud = NodePath("../CanvasLayer/Hud")
+main_scene = NodePath("..")
+player_node = NodePath("../player")
+game_over_screen = NodePath("../CanvasLayer2/GameOverScreen")
+world_tiles = NodePath("../World")
