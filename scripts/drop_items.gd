@@ -13,13 +13,14 @@ func drop_items():
 		
 		if !scene:
 			scene = get_tree().root
-		scene.add_child(new_item)
+		scene.call_deferred('add_child', new_item)
+		#scene.add_child(new_item)
 		
 		new_item.global_position = self.global_position
 		var angle = randf()
 		var x = cos(angle)
 		var y = sin(angle)
-		drop_to(new_item, 50 * Vector2(x,y) + self.global_position)
+		call_deferred('drop_to', new_item, 50 * Vector2(x,y) + self.global_position)
 
 func drop_to(instance, target: Vector2) -> void:
 	instance.remove_from_group('resources')
