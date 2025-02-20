@@ -3,17 +3,26 @@ extends Node2D
 @onready var main_scene := preload("res://scenes/main.tscn").instantiate()
 @onready var hud: Hud = main_scene.get_node('CanvasLayer/Hud') as Hud
 
+@onready var level_manager: LevelManager = LevelManager.new()
+
 var gold_scn: PackedScene = preload('res://prefabs/gold.tscn')
 var wood_scn: PackedScene = preload('res://prefabs/wood.tscn')
 var meat_scn: PackedScene = preload('res://prefabs/meat.tscn')
 
 const ENEMY := preload("res://prefabs/enemy.tscn")
 
+func _on_enemey_killed() -> void:
+	print('parabens, matou o inimigo')
+	var next_level = level_manager.next_level()
+	get_tree().change_scene_to_packed(next_level)
+
+
 func add_enemy() -> void:
 	var enemy = ENEMY.instantiate() as Enemy
 	main_scene.add_child(enemy)
 	enemy.global_position = Vector2(983, 656)
 	enemy.target = main_scene.get_node('player/CharacterBody2D')
+	enemy.health_component.die.connect(_on_enemey_killed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

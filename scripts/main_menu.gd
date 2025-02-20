@@ -2,13 +2,12 @@ extends Node2D
 
 @onready var TEST_SCENE = load("res://scenes/test/test_scene.tscn")
 
+@onready var level_manager: LevelManager = LevelManager.new()
+
 
 func start_game():
-	if TEST_SCENE == null:
-		print("Test scene failed to load")
-		return
-	
-	get_tree().change_scene_to_packed(TEST_SCENE)
+	var scene = level_manager.next_level()
+	get_tree().change_scene_to_packed(scene)
 
 
 func _on_button_pressed() -> void:
