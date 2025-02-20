@@ -10,6 +10,7 @@ const WOOD = preload("res://prefabs/wood.tscn")
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hit_animation: AnimationPlayer = $HitAnimation
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var drop_items: DropItems = $DropItems
 
 func damage(_attack: Attack) -> void:
 	if health_component.health <= 0:
@@ -17,29 +18,19 @@ func damage(_attack: Attack) -> void:
 	sprite.play('hit')
 	hit_animation.play('hit')	
 
-func drop_items():
-	var wood_qty = randi_range(MIN_DROP, MAX_DROP)
-		
-	for i in range(wood_qty):
-		var new_wood = WOOD.instantiate()
-		self.get_parent().add_child(new_wood)
-		new_wood.global_position = self.global_position
-		var angle = randf()
-		var x = cos(angle)
-		var y = sin(angle)
-		new_wood.drop_to(50 * Vector2(x,y) + self.global_position)
-
-		sprite.play('chopped')
-	print('dropped %s items' % str(wood_qty))
-	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite.play('idle')
 	sprite.animation_finished.connect(_sprite_finished)
 	health_component.MAX_HEALTH = 3
 	health_component.health = 3
-	health_component.die.connect(drop_items)
+	health_component.die.connect(_on_die)
 	hitbox_component.hit.connect(damage)
+	
+func _on_die() -> void: 
+	drop_items.drop_items()
+	hitbox_component.hit.disconnect(damage)
+	sprite.play('chopped')
 	
 	
 func _sprite_finished() -> void:

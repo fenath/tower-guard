@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://bm5i5qwn085kf"]
+[gd_scene load_steps=18 format=3 uid="uid://bm5i5qwn085kf"]
 
 [ext_resource type="Texture2D" uid="uid://dfhun0rxuho42" path="res://assets/Resources/Trees/Tree.png" id="1_ev32q"]
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_r4wqh"]
 [ext_resource type="Script" path="res://scripts/health_component.gd" id="3_536mh"]
 [ext_resource type="PackedScene" uid="uid://cboi10dwwujxm" path="res://prefabs/effects/hit_animation.tscn" id="4_qtakn"]
 [ext_resource type="Script" path="res://scripts/hitbox_component.gd" id="4_vpb1d"]
+[ext_resource type="Script" path="res://scripts/drop_items.gd" id="6_km604"]
+[ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="7_suyp1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aja1u"]
 atlas = ExtResource("1_ev32q")
@@ -105,3 +107,9 @@ position = Vector2(0.5, 12)
 shape = SubResource("RectangleShape2D_pkd5u")
 
 [node name="HitAnimation" parent="." instance=ExtResource("4_qtakn")]
+
+[node name="DropItems" type="Node2D" parent="."]
+script = ExtResource("6_km604")
+MIN_DROP = 2
+MAX_DROP = 5
+item = ExtResource("7_suyp1")
