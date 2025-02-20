@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 			speeds[i] = MAX_SPEED * speeds[i].normalized()
 		
 		resource.global_position += (speeds[i] * delta)
-			
+
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group('resources'):
@@ -56,25 +56,15 @@ func _on_body_exited(body: Node2D) -> void:
 			var i = resources.find(body)
 			speeds.remove_at(i)
 			resources.erase(body)
-			
+
 func _on_collection_area_entered(body: Node2D) -> void:
 	if body.is_in_group('resources'):
 		var i = resources.find(body)
-		speeds.remove_at(i)
-		resources.erase(body)
+		if i >= 0:
+			speeds.remove_at(i)
+			resources.erase(body)
 		collect.emit(body)
 		body.queue_free()
-		# TODO: if body.has_method('collect'):
-		#			body.collect()
-		
-#func collect(body: Node2D) -> void:
-	#if body.has_signal('gold_up'):
-		#body.gold_up.emit()
-	#if body.has_signal('meat_up'):
-		#body.meat_up.emit()
-	#if body.has_signal('wood_up'):
-		#body.wood_up.emit()
-
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group('resources'):
