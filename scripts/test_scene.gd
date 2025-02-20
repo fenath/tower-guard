@@ -14,7 +14,7 @@ const ENEMY := preload("res://prefabs/enemy.tscn")
 func _on_enemey_killed() -> void:
 	print('parabens, matou o inimigo')
 	var next_level = level_manager.next_level()
-	get_tree().change_scene_to_packed(next_level)
+	get_tree().call_deferred('change_scene_to_packed', next_level)
 
 
 func add_enemy() -> void:
@@ -43,6 +43,8 @@ func _ready() -> void:
 	hud.assign_inventory(player.inventory)
 	hud.assign_player_health_component(player.health_component)
 	player.health_component.die.connect(game_over)
+	
+	level_manager.current_level = 0
 
 func _on_collect() -> void:
 	var new_item: Node2D = [gold_scn, meat_scn, wood_scn].pick_random().instantiate()
