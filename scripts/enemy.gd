@@ -5,8 +5,10 @@ const DAMAGE = 1
 var direction: Vector2 = Vector2.ZERO
 var last_x: float = 0.0
 
-@onready var navigation_agent: NavigationAgent2D = $NavigationAgent
 @export var target: Node2D = null
+@export var healthbar_visible: bool = true
+
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var chasing: Node2D = $StateMachine/Chasing
 @onready var idle: EnemyIdleState = $StateMachine/Idle
@@ -16,6 +18,7 @@ var last_x: float = 0.0
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine: StateMachine = $StateMachine
 @onready var attack_area: Area2D = $AttackArea
+@onready var health_bar: HealthBar = $HealthBar
 
 
 func _ready() -> void:
@@ -26,7 +29,7 @@ func _ready() -> void:
 	chasing.lost_chasing_range.connect(_on_lost_chasing_range)
 	attacking.lost_range.connect(_on_lost_range)
 	idle.next_to_player.connect(_on_got_next_to_player)
-
+	health_bar.visible = self.healthbar_visible
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()

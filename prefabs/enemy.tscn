@@ -189,7 +189,6 @@ frame_progress = 1.0
 path_desired_distance = 10.0
 path_postprocessing = 1
 avoidance_enabled = true
-debug_enabled = true
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_pr4ii")

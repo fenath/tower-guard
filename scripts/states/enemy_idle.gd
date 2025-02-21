@@ -26,6 +26,8 @@ func get_player_node() -> PlayerCharacter:
 	
 func check_range() -> void:
 	var player = get_player_node()
+	if !player:
+		return
 	if character.global_position.distance_to(player.global_position) < chasing_range:
 		next_to_player.emit()
 

@@ -1,18 +1,164 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdlf4vmn38i1s"]
+[gd_scene load_steps=15 format=3 uid="uid://bdlf4vmn38i1s"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_0vjwj"]
 [ext_resource type="FontFile" uid="uid://i2wscuyqlt4s" path="res://assets/Effects/Fire/BigBlueTerm437NerdFont-Regular.ttf" id="2_86hdv"]
+[ext_resource type="Shader" path="res://shaders/pause_menu.gdshader" id="3_85ar8"]
+[ext_resource type="PackedScene" uid="uid://uaovnvx57acf" path="res://scenes/menus/idle_scene.tscn" id="3_wq8t5"]
+[ext_resource type="Texture2D" uid="uid://djbp4vd1byr6b" path="res://assets/UI/Buttons/Button_Blue_3Slides.png" id="4_88l7m"]
+[ext_resource type="Texture2D" uid="uid://dw2cwkdrfr4n4" path="res://assets/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="5_fj4b5"]
+[ext_resource type="Script" path="res://scripts/center_pivot_label.gd" id="6_gvjrq"]
+[ext_resource type="Texture2D" uid="uid://dtxigab5h827g" path="res://assets/UI/Ribbons/Ribbon_Blue_3Slides.png" id="7_qe83k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ic37s"]
+shader = ExtResource("3_85ar8")
+shader_parameter/amount = 2.135
+
+[sub_resource type="LabelSettings" id="LabelSettings_2omei"]
+font = ExtResource("2_86hdv")
+font_size = 12
+font_color = Color(0.945098, 0.854902, 0.517647, 1)
+outline_size = 4
+outline_color = Color(0.713726, 0.333333, 0.333333, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lymxq"]
+font = ExtResource("2_86hdv")
+font_size = 24
+font_color = Color(0.945098, 0.854902, 0.517647, 1)
+outline_size = 4
+outline_color = Color(0.713726, 0.333333, 0.333333, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.27451)
+
+[sub_resource type="Animation" id="Animation_67buo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/RibbonBlue3Slides/Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5b7r5"]
+resource_name = "floatingTitle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/RibbonBlue3Slides/Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qm5e7"]
+_data = {
+"RESET": SubResource("Animation_67buo"),
+"breath": SubResource("Animation_5b7r5")
+}
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_0vjwj")
 
-[node name="Button" type="Button" parent="."]
-offset_left = 447.0
-offset_top = 441.0
-offset_right = 711.0
-offset_bottom = 514.0
-theme_override_fonts/font = ExtResource("2_86hdv")
-theme_override_font_sizes/font_size = 64
-text = "Jogar!"
+[node name="IdleScene" parent="." instance=ExtResource("3_wq8t5")]
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ic37s")
+offset_right = 1206.0
+offset_bottom = 675.0
+color = Color(0.130014, 0.108216, 0.128932, 1)
+
+[node name="Control" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 200.0
+offset_right = 20.0
+offset_bottom = 240.0
+grow_horizontal = 2
+
+[node name="RibbonBlue3Slides" type="Sprite2D" parent="CanvasLayer/Control"]
+scale = Vector2(3, 3)
+texture = ExtResource("7_qe83k")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/RibbonBlue3Slides"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -40.0
+offset_right = -96.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(96, 32)
+size_flags_horizontal = 4
+text = "Tower Guard"
+label_settings = SubResource("LabelSettings_2omei")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_gvjrq")
+
+[node name="Button" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.0
+offset_top = 121.0
+offset_right = -21.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("4_88l7m")
+texture_pressed = ExtResource("5_fj4b5")
+
+[node name="Label" type="Label" parent="CanvasLayer/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -20.5
+offset_right = 48.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Jogar!"
+label_settings = SubResource("LabelSettings_lymxq")
+
+[node name="FadeRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qm5e7")
+}
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

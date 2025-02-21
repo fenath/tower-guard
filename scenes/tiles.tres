@@ -1,7 +1,22 @@
-[gd_resource type="TileSet" load_steps=46 format=3 uid="uid://co544h8kq053d"]
+[gd_resource type="TileSet" load_steps=76 format=3 uid="uid://co544h8kq053d"]
 
 [ext_resource type="Texture2D" uid="uid://byfbxaax0bvc6" path="res://assets/Terrain/Ground/Tilemap_Flat.png" id="1_o1d1d"]
 [ext_resource type="Texture2D" uid="uid://8eic7i06vpi7" path="res://assets/Terrain/Bridge/Bridge_All.png" id="2_3kb53"]
+[ext_resource type="Texture2D" uid="uid://te6soh16wcka" path="res://assets/Deco/09.png" id="3_7ljki"]
+[ext_resource type="Texture2D" uid="uid://dadsfsrn1wl4q" path="res://assets/Deco/10.png" id="4_j5w7n"]
+[ext_resource type="Texture2D" uid="uid://blchqgtsm6eau" path="res://assets/Deco/11.png" id="5_6oafa"]
+[ext_resource type="Texture2D" uid="uid://cwomt4kamiiv3" path="res://assets/Deco/12.png" id="6_voro7"]
+[ext_resource type="Texture2D" uid="uid://dpivpmyb13d8b" path="res://assets/Deco/13.png" id="7_mo322"]
+[ext_resource type="Texture2D" uid="uid://nfowlmechfc0" path="res://assets/Deco/14.png" id="8_ui4ro"]
+[ext_resource type="Texture2D" uid="uid://dnbmcfhshydpa" path="res://assets/Deco/15.png" id="9_kxt3l"]
+[ext_resource type="Texture2D" uid="uid://bhfs6bxwagjrx" path="res://assets/Deco/01.png" id="10_lvm5o"]
+[ext_resource type="Texture2D" uid="uid://cr3b86ube16iq" path="res://assets/Deco/02.png" id="11_td5sv"]
+[ext_resource type="Texture2D" uid="uid://whquts6gr0ax" path="res://assets/Deco/03.png" id="12_4klhi"]
+[ext_resource type="Texture2D" uid="uid://cvh37mi0py0om" path="res://assets/Deco/04.png" id="13_b6vcg"]
+[ext_resource type="Texture2D" uid="uid://bnnstyjuw16dt" path="res://assets/Deco/05.png" id="14_hq6up"]
+[ext_resource type="Texture2D" uid="uid://btbt5htr68gpx" path="res://assets/Deco/06.png" id="15_kjha7"]
+[ext_resource type="Texture2D" uid="uid://by1sxty0kdvvc" path="res://assets/Deco/07.png" id="16_rwfng"]
+[ext_resource type="Texture2D" uid="uid://b5ivxosc2q2b6" path="res://assets/Deco/08.png" id="17_cfgww"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_w0vai"]
 vertices = PackedVector2Array(32, 32, -22, 32, -24.5, -23.5, 32, -25.5)
@@ -259,9 +274,11 @@ texture_region_size = Vector2i(64, 64)
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, -32, -32, -23, -32, -23, 23.5, 32, 23.5, 32, 32)
 0:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_yc8ap")
+1:2/next_alternative_id = 2
 1:2/0 = 0
 1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, -32, 25, 32, 24, 32, 32)
 1:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_2fhin")
+1:2/1 = 1
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, 32, -32, 32, -32, 23, 23.5, 23, 23.5, -32, 32, -32)
 2:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_7vm2m")
@@ -364,9 +381,84 @@ texture_region_size = Vector2i(64, 64)
 1:1/0 = 0
 1:2/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vw6ps"]
+texture = ExtResource("3_7ljki")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wf1md"]
+texture = ExtResource("4_j5w7n")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q3lfd"]
+texture = ExtResource("5_6oafa")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8qtsk"]
+texture = ExtResource("6_voro7")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aef7c"]
+texture = ExtResource("7_mo322")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_drg1f"]
+texture = ExtResource("8_ui4ro")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb1ac"]
+texture = ExtResource("9_kxt3l")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0um8i"]
+texture = ExtResource("10_lvm5o")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uy4xk"]
+texture = ExtResource("11_td5sv")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ftn07"]
+texture = ExtResource("12_4klhi")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ua3la"]
+texture = ExtResource("13_b6vcg")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_18w26"]
+texture = ExtResource("14_hq6up")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f1gha"]
+texture = ExtResource("15_kjha7")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gy8jw"]
+texture = ExtResource("16_rwfng")
+texture_region_size = Vector2i(64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nt0kk"]
+texture = ExtResource("17_cfgww")
+texture_region_size = Vector2i(64, 64)
+
 [resource]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_wkevb")
 sources/1 = SubResource("TileSetAtlasSource_sedkd")
+sources/2 = SubResource("TileSetAtlasSource_0um8i")
+sources/3 = SubResource("TileSetAtlasSource_uy4xk")
+sources/4 = SubResource("TileSetAtlasSource_ftn07")
+sources/5 = SubResource("TileSetAtlasSource_ua3la")
+sources/6 = SubResource("TileSetAtlasSource_18w26")
+sources/7 = SubResource("TileSetAtlasSource_f1gha")
+sources/8 = SubResource("TileSetAtlasSource_gy8jw")
+sources/9 = SubResource("TileSetAtlasSource_nt0kk")
+sources/10 = SubResource("TileSetAtlasSource_vw6ps")
+sources/11 = SubResource("TileSetAtlasSource_wf1md")
+sources/12 = SubResource("TileSetAtlasSource_q3lfd")
+sources/13 = SubResource("TileSetAtlasSource_8qtsk")
+sources/14 = SubResource("TileSetAtlasSource_aef7c")
+sources/15 = SubResource("TileSetAtlasSource_drg1f")
+sources/16 = SubResource("TileSetAtlasSource_eb1ac")
