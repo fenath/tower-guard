@@ -11,6 +11,8 @@ const GOLD = preload("res://prefabs/gold.tscn")
 @onready var hit_animation: AnimationPlayer = $HitAnimation
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var drop_items: DropItems = $DropItems
+@onready var respawn_component: RespawnComponent = $RespawnComponent
+
 
 func damage(_attack: Attack) -> void:
 	if health_component.health <= 0:
@@ -26,10 +28,13 @@ func _ready() -> void:
 	health_component.MAX_HEALTH = 3
 	health_component.health = 3
 	health_component.die.connect(drop_items.drop_items)
+	health_component.die.connect(respawn_component._on_parent_died)
 	hitbox_component.hit.connect(damage)
 	
 	
-	
+func reset() -> void:
+	sprite.play('inactive')	
+	health_component.health = health_component.MAX_HEALTH
 	
 func _sprite_finished() -> void:
 	if sprite.animation == 'destroyed':

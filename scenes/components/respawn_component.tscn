@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4okp2e204psu"]
+
+[ext_resource type="Script" path="res://scripts/respawn_component.gd" id="1_ccmmd"]
+[ext_resource type="Texture2D" uid="uid://d22lophoqach1" path="res://assets/UI/ProgressBars/32x32 circle bar under.png" id="2_pflnc"]
+[ext_resource type="Texture2D" uid="uid://cjscvw6nxl2l6" path="res://assets/UI/ProgressBars/32x32 circle bar over.png" id="3_proeh"]
+[ext_resource type="Texture2D" uid="uid://dm1a1b4u0npo3" path="res://assets/UI/ProgressBars/32x32 circle bar progress green.png" id="4_7oyyi"]
+
+[node name="RespawnComponent" type="Node2D"]
+script = ExtResource("1_ccmmd")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+max_value = 4.0
+step = 0.01
+value = 4.0
+fill_mode = 4
+texture_under = ExtResource("2_pflnc")
+texture_over = ExtResource("3_proeh")
+texture_progress = ExtResource("4_7oyyi")
