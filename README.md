@@ -20,6 +20,10 @@ Jogo da matéria "Jogos de Computador" ministrada em 2024/2
   - [ ] 12 : Sistema de geração de orcs em posição pseudo aleatórias no cenário (dependente do 1, 5, 6)
   - [ ] 13 : invasão Orc (depende do 1, 5, 6, 7)
 
+## Ficha de Acompanhamento: Semana 8
+![2025-02-21_23-56](https://github.com/user-attachments/assets/f66f9ed2-dc1a-411f-aee3-acbe96015ace)
+
+
 
 <!-- Definições de badges (ocultas) -->
 [badge-finalizado]: https://img.shields.io/badge/Finalizado-brightgreen?style=flat-square
