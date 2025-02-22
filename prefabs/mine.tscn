@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbi36alg8c4eu"]
+[gd_scene load_steps=14 format=3 uid="uid://bbi36alg8c4eu"]
 
 [ext_resource type="Script" path="res://scripts/mine.gd" id="1_4txka"]
 [ext_resource type="Texture2D" uid="uid://bb2ce03i8nefl" path="res://assets/Resources/Gold Mine/GoldMine_Active.png" id="2_a8dpv"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://io7jjehpxqir" path="res://scenes/components/hitbox_component.tscn" id="7_sn7yf"]
 [ext_resource type="Script" path="res://scripts/drop_items.gd" id="8_b1d4v"]
 [ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="9_jyk6k"]
+[ext_resource type="PackedScene" uid="uid://c4okp2e204psu" path="res://scenes/components/respawn_component.tscn" id="10_1o3p7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_apry0"]
 animations = [{
@@ -76,3 +77,7 @@ script = ExtResource("8_b1d4v")
 MIN_DROP = 1
 MAX_DROP = 4
 item = ExtResource("9_jyk6k")
+
+[node name="RespawnComponent" parent="." instance=ExtResource("10_1o3p7")]
+position = Vector2(-15, -96)
+respawn_time = 5.0
