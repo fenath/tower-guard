@@ -1,10 +1,13 @@
-[gd_scene load_steps=38 format=3 uid="uid://7lsouk5v2cwt"]
+[gd_scene load_steps=41 format=3 uid="uid://7lsouk5v2cwt"]
 
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="1_jrk1o"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="2_nr4ix"]
 [ext_resource type="Texture2D" uid="uid://deo0js5p0gxx7" path="res://assets/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="3_ko5bi"]
 [ext_resource type="PackedScene" uid="uid://bbwglqm1aagrv" path="res://scenes/components/health_component.tscn" id="4_ra3yf"]
 [ext_resource type="PackedScene" uid="uid://io7jjehpxqir" path="res://scenes/components/hitbox_component.tscn" id="5_o16au"]
+[ext_resource type="AudioStream" uid="uid://d052imjb16hsu" path="res://assets/sounds/eating.wav" id="6_5vqxw"]
+[ext_resource type="AudioStream" uid="uid://jyfcv3knlc23" path="res://assets/sounds/wrong.mp3" id="7_65wwr"]
+[ext_resource type="AudioStream" uid="uid://io308l21tmwe" path="res://assets/bubbles.wav" id="8_bgriw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q0mwa"]
 radius = 18.0
@@ -301,5 +304,17 @@ monitoring = false
 [node name="Shape" type="CollisionShape2D" parent="CharacterBody2D/AttackArea"]
 position = Vector2(49, -1)
 shape = SubResource("CircleShape2D_s66w5")
+
+[node name="eatSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("6_5vqxw")
+volume_db = -10.0
+
+[node name="wrongSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("7_65wwr")
+volume_db = -10.0
+
+[node name="pickupSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("8_bgriw")
+volume_db = -10.0
 
 [connection signal="area_entered" from="CharacterBody2D/AttackArea" to="CharacterBody2D" method="_on_attack_area_area_entered"]

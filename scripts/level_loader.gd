@@ -36,6 +36,7 @@ func load_scene() -> void:
 	var player = get_player_node()
 	hud.assign_inventory(player.inventory)
 	hud.assign_player_health_component(player.health_component)
+	player.message.connect(hud._on_message)
 	player.health_component.die.connect(game_over)
 	set_camera()
 	

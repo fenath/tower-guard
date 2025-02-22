@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://by3xygwku58v" path="res://assets/UI/Banners/Carved_Regular.png" id="5_erodh"]
 [ext_resource type="Texture2D" uid="uid://b84nidbah2262" path="res://assets/Resources/Resources/M_Idle.png" id="5_ub4xh"]
 [ext_resource type="Texture2D" uid="uid://c8rwasm7d80ln" path="res://assets/Resources/Resources/W_Idle.png" id="6_j0uyu"]
-[ext_resource type="AudioStream" uid="uid://io308l21tmwe" path="res://assets/bubbles.wav" id="10_m5f4h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1mkxp"]
 texture = ExtResource("2_lrisn")
@@ -58,9 +57,18 @@ outline_color = Color(0.306017, 0.305986, 0.225674, 1)
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.27451)
 
+[sub_resource type="LabelSettings" id="LabelSettings_k06lt"]
+font = ExtResource("3_yxomu")
+font_size = 24
+font_color = Color(1, 1, 1, 0.705882)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Hud" type="Control" groups=["hud"]]
 layout_mode = 3
 anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_u65tx")
 
 [node name="HP" type="TextureRect" parent="."]
@@ -166,9 +174,36 @@ text = "3x"
 label_settings = SubResource("LabelSettings_1aapl")
 horizontal_alignment = 2
 
-[node name="pickupSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_m5f4h")
-volume_db = -10.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 472.0
+offset_right = 1148.0
+offset_bottom = 593.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MessageLabel" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "esta é a mensagem
+"
+label_settings = SubResource("LabelSettings_k06lt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MessageLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.0627451)
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

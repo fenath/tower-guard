@@ -9,16 +9,15 @@ class_name Hud extends Control
 @onready var meat_qty: int = 0: set =  _set_meat
 @onready var gold_qty: int = 0: set =  _set_gold
 @onready var wood_qty: int = 0: set =  _set_wood
-
+@onready var center_container: CenterContainer = $CenterContainer
+@onready var message_label: Label = $CenterContainer/MessageLabel
+@onready var tween = get_tree().create_tween()
 var player_health_component: HealthComponent = null
 
 var inventory: Inventory
 
 signal collect
 
-func play_pickup() -> void:
-	$pickupSound.play()
-	
 func assign_inventory(_inventory: Inventory) -> void:
 	inventory = _inventory
 	if not inventory.inventory_changed.is_connected(update_inventory_labels):
@@ -49,6 +48,20 @@ func _set_wood(value):
 
 func label_txt(value: int) -> String:
 	return str(value) + 'x'
+	
+func set_message(message: String) -> void:
+	if tween:
+		tween.kill()
+	
+	tween = create_tween()
+	
+	message_label.text = message
+	tween.tween_property(center_container, 'modulate', Color(1,1,1,1), 0.1)
+	tween.tween_interval(2)
+	tween.tween_property(center_container, 'modulate', Color(1,1,1,0), 0.5)
+
+func _on_message(message: String) -> void:
+	set_message(message)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,11 +69,11 @@ func _ready() -> void:
 	meat_qty = 0
 	gold_qty = 0
 	wood_qty = 0
-	collect.connect(play_pickup)
+	center_container.modulate = Color(1,1,1,0)
 
 func update_current_hp(value: int): 
 	current_hp = value
-	$HP/HpLabel.text = '❤️ ' + str(current_hp)
+	$HP/HpLabel.text = ' ' + str(current_hp)
 
 func _process(_delta: float) -> void:
 	if !player_health_component:
@@ -77,7 +90,6 @@ func _on_button_2_pressed() -> void:
 
 
 func _on_button_3_pressed() -> void:
-	$pickupSound.play()
 	meat_qty += 1
 	
 func _on_gold_up() -> void:

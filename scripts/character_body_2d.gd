@@ -2,6 +2,7 @@ class_name PlayerCharacter extends CharacterBody2D
 
 const SPEED = 300.0
 signal attack
+signal message(value: String)
 
 @onready var magnet_action: MagnetAction = preload(
 	"res://scenes/magnet_action.tscn"
@@ -12,6 +13,10 @@ signal attack
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var hit_animation: AnimationPlayer = $Sprite/HitAnimation
+@onready var eat_sound: AudioStreamPlayer = $eatSound
+@onready var wrong_sound: AudioStreamPlayer = $wrongSound
+@onready var pickup_sound: AudioStreamPlayer = $pickupSound
+
 
 var inventory: Inventory = Inventory.new()
 var hit_list: Array[HitboxComponent] = []
@@ -44,6 +49,7 @@ func _ready() -> void:
 	if magnet_action:
 		self.add_child(magnet_action)
 		magnet_action.position = Vector2.ZERO
+		magnet_action.collect.connect(_on_collect)
 		magnet_action.collect.connect(inventory.collect)
 	
 	hitbox_component.hit.connect(_on_hit_taken)
@@ -58,6 +64,30 @@ func _on_die() -> void:
 func _on_hit_taken(atk: Attack) -> void:
 	health_component.damage(atk)
 	hit_animation.play('hit')
+
+func _on_collect(_item: Node2D) -> void:
+	pickup_sound.play()
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("eat"):
+		eat()
+
+func eat() -> void:
+	
+	if inventory.meat_qty <= 0:
+		wrong_sound.play()
+		message.emit('Sem carne no inventário')
+		return
+		
+	if health_component.health == health_component.MAX_HEALTH:
+		wrong_sound.play()
+		message.emit('Vida cheia')
+		return
+	
+	inventory.meat_qty -= 1
+	health_component.health += 1
+	eat_sound.play()
+	inventory.inventory_changed.emit()
 
 func _physics_process(_delta: float) -> void:
 	if is_dead:
