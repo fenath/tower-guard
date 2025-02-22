@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var main_scene := preload("res://scenes/main.tscn").instantiate()
 @onready var hud: Hud = main_scene.get_node('CanvasLayer/Hud') as Hud
+@onready var placa: Sign = main_scene.get_node('Placa') as Sign
 
 @onready var level_manager: LevelManager = LevelManager.new()
 
@@ -13,6 +14,11 @@ const ENEMY := preload("res://prefabs/enemy.tscn")
 
 func _on_enemey_killed() -> void:
 	print('parabens, matou o inimigo')
+	
+
+func _on_finish_level() -> void:
+	print('mudando de level')
+	await get_tree().create_timer(1).timeout
 	var next_level = level_manager.next_level()
 	get_tree().call_deferred('change_scene_to_packed', next_level)
 
@@ -27,22 +33,14 @@ func add_enemy() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_child(main_scene)
-	var res = main_scene.get_node('resources')
 	
-	for child in res.get_children():
-		if child.has_signal('meat_up'):
-			child.meat_up.connect(hud._on_meat_up)
-		if child.has_signal('gold_up'):
-			child.gold_up.connect(hud._on_gold_up)
-		if child.has_signal('wood_up'):
-			child.wood_up.connect(hud._on_wood_up)
-			
 	add_enemy()
 	
 	var player: PlayerCharacter = main_scene.get_node('player/CharacterBody2D')
 	hud.assign_inventory(player.inventory)
 	hud.assign_player_health_component(player.health_component)
 	player.health_component.die.connect(game_over)
+	placa.finished.connect(_on_finish_level)
 	
 	level_manager.current_level = 0
 

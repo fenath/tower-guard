@@ -1,88 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://djaltvt06unu0"]
+[gd_scene load_steps=12 format=3 uid="uid://djaltvt06unu0"]
 
 [ext_resource type="PackedScene" uid="uid://bjhjupefmfgqs" path="res://scenes/tiles.tscn" id="1_d6p3j"]
 [ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="3_617g2"]
 [ext_resource type="PackedScene" uid="uid://7lsouk5v2cwt" path="res://scenes/player.tscn" id="3_el764"]
-[ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="5_w7uh3"]
-[ext_resource type="Script" path="res://scripts/gold_entity.gd" id="6_jgvlv"]
-[ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="6_mytpp"]
-[ext_resource type="Texture2D" uid="uid://bunj2btgrwyu3" path="res://assets/Resources/Resources/G_Idle.png" id="7_52rrg"]
-[ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="7_m1s7h"]
-[ext_resource type="Texture2D" uid="uid://cco37rio8rbnf" path="res://assets/Resources/Resources/G_Spawn.png" id="8_xnn5u"]
+[ext_resource type="PackedScene" uid="uid://cqndhocdt7dso" path="res://prefabs/enemy.tscn" id="11_eqhpj"]
 [ext_resource type="PackedScene" uid="uid://bou6rky8jvdmr" path="res://prefabs/sheep.tscn" id="11_uqp6s"]
 [ext_resource type="PackedScene" uid="uid://bm5i5qwn085kf" path="res://prefabs/tree.tscn" id="12_53pmu"]
 [ext_resource type="PackedScene" uid="uid://cxmx3j8krviw5" path="res://scenes/menus/pause_menu.tscn" id="13_eflj3"]
 [ext_resource type="PackedScene" uid="uid://ciuv5atqspy81" path="res://scenes/menus/game_over_screen.tscn" id="13_inbjo"]
 [ext_resource type="PackedScene" uid="uid://bbi36alg8c4eu" path="res://prefabs/mine.tscn" id="14_1p1ub"]
 [ext_resource type="PackedScene" uid="uid://c671dawbw8t08" path="res://scenes/components/level_loader.tscn" id="15_k4o5o"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_uk4ba"]
-radius = 25.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6x4rj"]
-atlas = ExtResource("8_xnn5u")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h7krr"]
-atlas = ExtResource("8_xnn5u")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yfmud"]
-atlas = ExtResource("8_xnn5u")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0f6a"]
-atlas = ExtResource("8_xnn5u")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kakst"]
-atlas = ExtResource("8_xnn5u")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2nas8"]
-atlas = ExtResource("8_xnn5u")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hngpd"]
-atlas = ExtResource("8_xnn5u")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ouhmi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_52rrg")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6x4rj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h7krr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yfmud")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h0f6a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kakst")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2nas8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hngpd")
-}],
-"loop": false,
-"name": &"spawn",
-"speed": 10.0
-}]
+[ext_resource type="PackedScene" uid="uid://dwlwnlb17do78" path="res://prefabs/placa.tscn" id="16_hk7as"]
 
 [node name="main" type="Node2D"]
 y_sort_enabled = true
@@ -94,31 +22,6 @@ y_sort_enabled = true
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("3_617g2")]
 
 [node name="player" parent="." instance=ExtResource("3_el764")]
-
-[node name="resources" type="Node2D" parent="."]
-
-[node name="meat" parent="resources" instance=ExtResource("5_w7uh3")]
-position = Vector2(381, 692)
-
-[node name="gold" parent="resources" instance=ExtResource("6_mytpp")]
-position = Vector2(506, 563)
-
-[node name="wood" parent="resources" instance=ExtResource("7_m1s7h")]
-position = Vector2(593, 688)
-
-[node name="GoldEntity" type="StaticBody2D" parent="." groups=["resources"]]
-position = Vector2(565, 608)
-script = ExtResource("6_jgvlv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GoldEntity"]
-position = Vector2(6, 9)
-shape = SubResource("CircleShape2D_uk4ba")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GoldEntity"]
-sprite_frames = SubResource("SpriteFrames_ouhmi")
-animation = &"spawn"
-frame = 6
-frame_progress = 1.0
 
 [node name="Tree" parent="." instance=ExtResource("12_53pmu")]
 position = Vector2(969, 943)
@@ -180,3 +83,90 @@ main_scene = NodePath("..")
 player_node = NodePath("../player")
 game_over_screen = NodePath("../CanvasLayer2/GameOverScreen")
 world_tiles = NodePath("../World")
+
+[node name="Placa" parent="." instance=ExtResource("16_hk7as")]
+text = "Custo: 5x Ouros + 5x Madeiras"
+
+[node name="Mines" type="Node2D" parent="."]
+position = Vector2(640, 650)
+
+[node name="Mine2" parent="Mines" instance=ExtResource("14_1p1ub")]
+position = Vector2(3074, -143)
+
+[node name="Mine3" parent="Mines" instance=ExtResource("14_1p1ub")]
+position = Vector2(2744, 475)
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource("12_53pmu")]
+position = Vector2(989, 1605)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("12_53pmu")]
+position = Vector2(3485, 716)
+
+[node name="Tree4" parent="Trees" instance=ExtResource("12_53pmu")]
+position = Vector2(2704, 660)
+
+[node name="Tree5" parent="Trees" instance=ExtResource("12_53pmu")]
+position = Vector2(3200, 893)
+
+[node name="Tree6" parent="Trees" instance=ExtResource("12_53pmu")]
+position = Vector2(3359, 608)
+
+[node name="Tree3" parent="Trees" instance=ExtResource("12_53pmu")]
+position = Vector2(2862, 1109)
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(640, 650)
+
+[node name="enemy" parent="Enemies" instance=ExtResource("11_eqhpj")]
+position = Vector2(2097, 358)
+
+[node name="enemy2" parent="Enemies" instance=ExtResource("11_eqhpj")]
+position = Vector2(2933, 286)
+
+[node name="enemy3" parent="Enemies" instance=ExtResource("11_eqhpj")]
+position = Vector2(2249, -98)
+
+[node name="enemy4" parent="Enemies" instance=ExtResource("11_eqhpj")]
+position = Vector2(2405, 214)
+
+[node name="enemy5" parent="Enemies" instance=ExtResource("11_eqhpj")]
+position = Vector2(937, 695)
+
+[node name="enemy6" parent="Enemies" instance=ExtResource("11_eqhpj")]
+position = Vector2(375, 835)
+
+[node name="enemy7" parent="Enemies" instance=ExtResource("11_eqhpj")]
+position = Vector2(1091, 943)
+
+[node name="Sheeps" type="Node2D" parent="."]
+
+[node name="Sheep" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(3073.1, 430.809)
+
+[node name="Sheep2" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(3069, 613)
+
+[node name="Sheep3" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(3495, 501)
+
+[node name="Sheep4" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(3388.1, 865)
+
+[node name="Sheep5" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(3384, 1047.19)
+
+[node name="Sheep6" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(3810, 935.191)
+
+[node name="Sheep7" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(2547.1, 871)
+
+[node name="Sheep8" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(2543, 1053.19)
+
+[node name="Sheep9" parent="Sheeps" instance=ExtResource("11_uqp6s")]
+position = Vector2(2969, 941.191)
+
+[connection signal="read_message" from="Placa" to="CanvasLayer/Hud" method="_on_placa_read_message"]

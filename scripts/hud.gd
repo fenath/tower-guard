@@ -12,6 +12,8 @@ class_name Hud extends Control
 @onready var center_container: CenterContainer = $CenterContainer
 @onready var message_label: Label = $CenterContainer/MessageLabel
 @onready var tween = get_tree().create_tween()
+@onready var key_bindings_label: Label = $KeyBindingsLabel
+
 var player_health_component: HealthComponent = null
 
 var inventory: Inventory
@@ -70,6 +72,13 @@ func _ready() -> void:
 	gold_qty = 0
 	wood_qty = 0
 	center_container.modulate = Color(1,1,1,0)
+	hide_commands()
+	
+func hide_commands() -> void:
+	var commands_tween = get_tree().create_tween()
+	commands_tween.tween_interval(4)
+	commands_tween.tween_property(key_bindings_label, 'modulate', Color(1,1,1,0), 0.2)
+	commands_tween.play()
 
 func update_current_hp(value: int): 
 	current_hp = value
@@ -100,3 +109,7 @@ func _on_meat_up() -> void:
 	
 func _on_wood_up() -> void:
 	wood_qty += 1
+
+
+func _on_placa_read_message(Value: String) -> void:
+	set_message(Value)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://c7jm2yuaacdqh"]
+[gd_scene load_steps=20 format=4 uid="uid://c7jm2yuaacdqh"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_u65tx"]
 [ext_resource type="Texture2D" uid="uid://c2pfd8k5ikndt" path="res://assets/UI/Banners/Banner_Connection_Right.png" id="2_lrisn"]
@@ -63,6 +63,12 @@ font_size = 24
 font_color = Color(1, 1, 1, 0.705882)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ljbo2"]
+line_spacing = 4.0
+font = ExtResource("3_yxomu")
+font_size = 24
+font_color = Color(0, 0, 0, 0.737255)
 
 [node name="Hud" type="Control" groups=["hud"]]
 layout_mode = 3
@@ -204,6 +210,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.0627451)
+
+[node name="KeyBindingsLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 373.0
+offset_top = 52.0
+offset_right = 725.0
+offset_bottom = 188.0
+scale = Vector2(0.8, 0.8)
+text = "Comandos:
+[Esc]: Pausa
+Z: Ataca
+X: Construir torre
+C: Comer carne"
+label_settings = SubResource("LabelSettings_ljbo2")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

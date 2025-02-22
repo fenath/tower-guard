@@ -1,12 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqyfegfx02gnr"]
+[gd_scene load_steps=13 format=3 uid="uid://bqyfegfx02gnr"]
 
+[ext_resource type="Script" path="res://scripts/level_2.gd" id="1_dkv2m"]
 [ext_resource type="PackedScene" uid="uid://bn8wiaurr8ao3" path="res://scenes/tiles2.tscn" id="1_x3vgv"]
 [ext_resource type="PackedScene" uid="uid://c7jm2yuaacdqh" path="res://scenes/hud.tscn" id="2_jeckm"]
 [ext_resource type="PackedScene" uid="uid://7lsouk5v2cwt" path="res://scenes/player.tscn" id="3_oxgis"]
-[ext_resource type="PackedScene" uid="uid://dsb8p4ysfqkdi" path="res://prefabs/meat.tscn" id="4_j4sou"]
-[ext_resource type="PackedScene" uid="uid://buky2dgx2kia3" path="res://prefabs/gold.tscn" id="5_lird1"]
-[ext_resource type="PackedScene" uid="uid://br5nrp3rtcimi" path="res://prefabs/wood.tscn" id="6_e1nba"]
 [ext_resource type="PackedScene" uid="uid://bm5i5qwn085kf" path="res://prefabs/tree.tscn" id="10_vgh7n"]
+[ext_resource type="PackedScene" uid="uid://dwlwnlb17do78" path="res://prefabs/placa.tscn" id="11_5l87d"]
 [ext_resource type="PackedScene" uid="uid://bou6rky8jvdmr" path="res://prefabs/sheep.tscn" id="11_qcn54"]
 [ext_resource type="PackedScene" uid="uid://cxmx3j8krviw5" path="res://scenes/menus/pause_menu.tscn" id="12_lck56"]
 [ext_resource type="PackedScene" uid="uid://ciuv5atqspy81" path="res://scenes/menus/game_over_screen.tscn" id="13_5ve4u"]
@@ -16,6 +15,7 @@
 
 [node name="main" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_dkv2m")
 
 [node name="LevelLoader" parent="." node_paths=PackedStringArray("hud", "main_scene", "player_node", "game_over_screen", "world_tiles") instance=ExtResource("16_ucplp")]
 hud = NodePath("../CanvasLayer/Hud")
@@ -32,58 +32,34 @@ world_tiles = NodePath("../World")
 
 [node name="player" parent="." instance=ExtResource("3_oxgis")]
 
-[node name="resources" type="Node2D" parent="."]
-
-[node name="meat" parent="resources" instance=ExtResource("4_j4sou")]
-position = Vector2(381, 692)
-
-[node name="gold" parent="resources" instance=ExtResource("5_lird1")]
-position = Vector2(506, 563)
-
-[node name="wood" parent="resources" instance=ExtResource("6_e1nba")]
-position = Vector2(593, 688)
-
-[node name="Tree" parent="." instance=ExtResource("10_vgh7n")]
+[node name="Trees" type="Node2D" parent="."]
 position = Vector2(603, 1014)
 
-[node name="Tree2" parent="." instance=ExtResource("10_vgh7n")]
-position = Vector2(2870, 917)
+[node name="Tree2" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(2267, -97)
 
-[node name="Tree3" parent="." instance=ExtResource("10_vgh7n")]
-position = Vector2(940, 1640)
+[node name="Tree3" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(337, 626)
 
-[node name="Tree4" parent="." instance=ExtResource("10_vgh7n")]
-position = Vector2(2597, 1849)
+[node name="Tree4" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(1994, 835)
 
-[node name="Sheep2" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(1299, 1559)
+[node name="Tree" parent="Trees" instance=ExtResource("10_vgh7n")]
 
-[node name="Sheep3" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(2509, 1056)
+[node name="Tree5" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(2832, -403)
 
-[node name="Sheep4" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(659, 850)
+[node name="Tree6" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(2489, -196)
 
-[node name="Sheep5" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(1482, 1234)
+[node name="Tree7" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(1960, -569)
 
-[node name="Sheep6" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(3317, 792)
+[node name="Tree8" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(2661, -695)
 
-[node name="Sheep7" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(1004, 644)
-
-[node name="Sheep8" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(1010, 753)
-
-[node name="Sheep9" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(1351, 944)
-
-[node name="Sheep10" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(1391, 661)
-
-[node name="Sheep" parent="." instance=ExtResource("11_qcn54")]
-position = Vector2(556, 473)
+[node name="Tree9" parent="Trees" instance=ExtResource("10_vgh7n")]
+position = Vector2(882, -5)
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
@@ -100,5 +76,88 @@ position = Vector2(3108, 567)
 [node name="Mine3" parent="." instance=ExtResource("14_gre77")]
 position = Vector2(3644, 1248)
 
-[node name="enemy" parent="." instance=ExtResource("15_3qtro")]
+[node name="enemies" type="Node2D" parent="."]
 position = Vector2(1228, 1122)
+
+[node name="enemy" parent="enemies" instance=ExtResource("15_3qtro")]
+
+[node name="enemy2" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(124, 566)
+
+[node name="enemy3" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(-221, -430)
+
+[node name="enemy4" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(-425, 334)
+
+[node name="enemy5" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(1855, -418)
+
+[node name="enemy6" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(2166, 142)
+
+[node name="enemy7" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(2370, -277)
+
+[node name="enemy8" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(650, 6)
+
+[node name="enemy9" parent="enemies" instance=ExtResource("15_3qtro")]
+position = Vector2(1120, 707)
+
+[node name="Placa" parent="." instance=ExtResource("11_5l87d")]
+text = "Castelo:
+Ouro: 15
+Madeira: 10"
+gold_cost = 15
+wood_cost = 10
+
+[node name="Sheeps" type="Node2D" parent="."]
+
+[node name="Sheep2" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(1299, 1559)
+
+[node name="Sheep3" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(2509, 1056)
+
+[node name="Sheep4" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(659, 850)
+
+[node name="Sheep11" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(2791, 1067)
+
+[node name="Sheep12" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(3043, 951)
+
+[node name="Sheep13" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(2710, 437)
+
+[node name="Sheep14" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(3007, 412)
+
+[node name="Sheep15" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(3713, 760)
+
+[node name="Sheep5" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(1482, 1234)
+
+[node name="Sheep6" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(3317, 792)
+
+[node name="Sheep7" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(1004, 644)
+
+[node name="Sheep8" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(1010, 753)
+
+[node name="Sheep9" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(1351, 944)
+
+[node name="Sheep10" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(1391, 661)
+
+[node name="Sheep" parent="Sheeps" instance=ExtResource("11_qcn54")]
+position = Vector2(556, 473)
+
+[connection signal="finished" from="Placa" to="." method="_on_placa_finished"]
+[connection signal="read_message" from="Placa" to="." method="_on_placa_read_message"]

@@ -378,7 +378,7 @@ tile_set = ExtResource("5_v0cqx")
 
 [node name="tower" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAIAAkAAwAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAIAAoABAAAAAIAAAA=")
 tile_set = SubResource("TileSet_opymh")
 
 [node name="stone" type="TileMapLayer" parent="."]
